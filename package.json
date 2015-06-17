@@ -1,6 +1,7 @@
 {
   "name": "webtypist",
   "version": "0.0.1",
+  "license": "MIT",
   "description": "Typing web application (Client)",
   "scripts": {
     "start": "node build --watch",
