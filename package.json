@@ -1,0 +1,23 @@
+{
+  "name": "webtypist",
+  "version": "0.0.1",
+  "description": "Typing web application (Client)",
+  "scripts": {
+    "start": "node build --watch",
+    "build": "node build --release"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:StillLearnin/webtypist.git"
+  },
+  "keywords": [
+    "Web Typing"
+  ],
+  "author": "Melvin Ray Herr <stilllearnin@thettpost.com>",
+  "dependencies": {
+    "flux": "2.0.3",
+    "node-libs-browser": "^0.5.2",
+    "react": "0.13.3",
+    "webpack": "1.9.11"
+  }
+}
