@@ -1,10 +1,12 @@
 {
-  "name": "webtypist",
+  "name": "Touch-Typing-Trainer",
   "version": "0.0.1",
   "license": "MIT",
   "description": "Typing web application (Client)",
   "scripts": {
-    "start": "node build/server.js"
+    "start": "npm run serve | npm run dev",
+    "serve": "./node_modules/.bin/http-server -p 8080",
+    "dev": "webpack-dev-server --progress --colors --port 8090"
   },
   "repository": {
     "type": "git",
@@ -15,10 +17,15 @@
   ],
   "author": "Melvin Ray Herr <stilllearnin@thettpost.com>",
   "dependencies": {
-    "body-parser": "^1.13.1",
-    "express": "^4.12.4",
-    "ncp": "^2.0.0",
-    "node-watch": "^0.3.4",
-    "path": "^0.11.14"
+    "normalize.css": "^3.0.3",
+    "react": "~0.11.2"
+  },
+  "devDependencies": {
+    "css-loader": "^0.15.1",
+    "http-server": "~0.7.1",
+    "jsx-loader": "~0.11.2",
+    "style-loader": "^0.12.3",
+    "webpack": "~1.4.4",
+    "webpack-dev-server": "~1.6.5"
   }
 }
