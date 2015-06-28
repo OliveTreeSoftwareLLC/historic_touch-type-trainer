@@ -2,6 +2,7 @@
 'use strict'
 require("./login.css")
 var React = require('react');
+var AppDispatcher = require('../dispatchers/AppDispatcher');
 
 module.exports = React.createClass({
 
@@ -15,9 +16,17 @@ module.exports = React.createClass({
                 <input placeholder='Password'/>
             </div>
             <div>
-                <button>Login</button>
+                <button onClick={this.login}>Login</button>
             </div>
         </div>;
+    },
+
+    login() {
+        AppDispatcher.handleViewAction({
+            actionType: 'LOGIN',
+            id: 'guid-here-adsfasdfasdf',
+            name: 'Melvin Ray'
+        });
     }
 });
 
