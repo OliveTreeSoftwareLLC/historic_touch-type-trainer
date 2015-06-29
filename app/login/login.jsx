@@ -7,6 +7,7 @@ var AppDispatcher = require('../dispatchers/AppDispatcher');
 module.exports = React.createClass({
 
     render() {
+
         return <div className='login'>
             Enter your credentials
             <div>

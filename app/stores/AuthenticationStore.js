@@ -4,8 +4,8 @@ var assign = require('object-assign');
 
 var CHANGE_EVENT = 'change';
 var _user = {
-  id: '',
-  name: ''
+  id: 'khgglgl',
+  name: 'User'
 };
 
 function logIn(user) {
