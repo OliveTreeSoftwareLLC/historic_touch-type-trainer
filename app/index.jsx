@@ -19,6 +19,7 @@ var Body = React.createClass({
     componentDidMount() {
         AuthStore.addChangeListener(this._onChange);
         window.addEventListener("resize", this.updateDimensions);
+        this.updateDimensions();
     },
 
     componentWillUnmount() {
@@ -33,6 +34,7 @@ var Body = React.createClass({
         var width = window.innerWidth;
         this.setState({ horizontalMode: width > 700});
     },
+
     render() {
         return <div>
             <Header/>
