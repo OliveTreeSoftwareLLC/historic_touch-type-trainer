@@ -25,6 +25,9 @@ module.exports = React.createClass({
 
     render() {
         return <div className='header'>
+            <div className='stats'>
+                Errors: 0 WPM: 32
+            </div>
             <div className='authentication'>
                 { this.authenticatedState() }
             </div>

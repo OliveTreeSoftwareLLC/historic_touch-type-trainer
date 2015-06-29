@@ -2,13 +2,21 @@
 .header {
     background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#4c4c4c), color-stop(8%,#595959), color-stop(14%,#666666), color-stop(29%,#474747), color-stop(40%,#2c2c2c), color-stop(51%,#000000), color-stop(60%,#111111), color-stop(92%,#2b2b2b), color-stop(95%,#1c1c1c), color-stop(100%,#131313)); /* Chrome,Safari4+ */
     height: 50px;
+    padding-left: 15px;
+    padding-right: 15px;
 }
 
-div .authentication {
+.header > div {
     color: #969696;
-    float: right;
-    margin-right: 15px;
     position: relative;
     top: 50%;
     transform: translateY(-50%);
+}
+
+.stats {
+    float: left;
+}
+
+.authentication {
+    float: right;
 }
