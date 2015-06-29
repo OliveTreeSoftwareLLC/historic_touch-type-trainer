@@ -25,23 +25,28 @@ module.exports = React.createClass({
 
     render() {
         return <div className='header'>
-            <div className='stats'>
-                Errors: 0 WPM: 32
-            </div>
-            <div className='authentication'>
-                { this.authenticatedState() }
-            </div>
+            { this.stats() }
+            { this.authenticatedState() }
         </div>;
+    },
+
+    stats() {
+        if (this.state.isLoggedIn === true)
+            return <div className='stats'>
+                Errors: 0 WPM: 32
+            </div>;
     },
 
     authenticatedState() {
         if (this.state.isLoggedIn === true)
-            return <div>
+            return <div className='authentication'>
                 {'Logged in as ' + AuthStore.getName()}
                 <button onClick={this.LogOut}>Log Out</button>
             </div>
         else
-            return 'Not Logged In';
+            return <div className='authentication'>
+                Not Logged In
+            </div>;
     },
 
     LogOut(){
