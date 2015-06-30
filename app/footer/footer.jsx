@@ -8,7 +8,7 @@ module.exports = React.createClass({
 
     render() {
         return <div className='footer'>
-            Footer
+            <Keyboard/>
         </div>;
     }
 });
