@@ -11,39 +11,28 @@ body {
     bottom: 0;
 }
 
-.body.horizontalMode {
-
+.body {
+    display: flex;
+    min-height: 100%;
+    flex-direction: column;
 }
 
-.sheet-container.left {
-    width: 50%;
-    height: 100%;
-    float: left;
+.lesson-space {
+    flex: 1;
+    display: flex;
+    min-height: 100%;
+    flex-direction: row;
 }
 
-.sheet-container.right {
-    width: 50%;
-    height: 100%;
-    float: right;
+.login-space {
+    flex: 1;
 }
 
-.sheet-container.top {
-    height: 50%;
-}
-
-.sheet-container.bottom {
-    height: 50%;
+.sheet-container {
+    flex: 1;
 }
 
 .sheet {
     background-color: #FFF;
     margin: 6px;
-}
-
-.right > .sheet {
-    margin-left: 3px;
-}
-
-.left > .sheet {
-    margin-right: 3px;
 }

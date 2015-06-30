@@ -19,8 +19,6 @@ var Body = React.createClass({
 
     componentDidMount() {
         AuthStore.addChangeListener(this._onChange);
-        window.addEventListener("resize", this.updateDimensions);
-        this.updateDimensions();
     },
 
     componentWillUnmount() {
@@ -31,18 +29,8 @@ var Body = React.createClass({
         this.setState({ isLoggedIn: AuthStore.isLoggedIn() });
     },
 
-    updateDimensions() {
-        var width = window.innerWidth;
-        this.setState({ horizontalMode: width > 700});
-    },
-
     render() {
-        var bodyClasses = cx({
-            'body': true,
-            'horizontalMode': this.state.horizontalMode
-        });
-
-        return <div className={bodyClasses}>
+        return <div className='body'>
             <Header/>
             {this.renderLessonSpace()}
             <Footer/>
@@ -51,27 +39,16 @@ var Body = React.createClass({
 
     renderLessonSpace() {
         if (!this.state.isLoggedIn)
-            return <Login/>;
-
-        var workClasses = cx({
-            'sheet-container': true,
-            'left': this.state.horizontalMode,
-            'bottom': !this.state.horizontalMode
-        });
-
-
-        var lessonClasses = cx({
-            'sheet-container': true,
-            'right': this.state.horizontalMode,
-            'top': !this.state.horizontalMode
-        });
+            return <div className='login-space'>
+                <Login/>
+            </div>;
 
         return <div className='lesson-space'>
-            <div className={lessonClasses}>
-                <Lesson className={lessonClasses}/>
+            <div className='sheet-container'>
+                <Lesson className='lesson-sheet'/>
             </div>
-            <div className={workClasses}>
-                <Work />
+            <div className='sheet-container'>
+                <Work className='work-sheet'/>
             </div>
         </div>;
 
