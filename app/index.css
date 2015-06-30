@@ -12,15 +12,15 @@ body {
 }
 
 .body {
-    position: absolute;
-    top: 50px;
-    bottom: 18px;
+    position: fixed;
     left: 0;
     right: 0;
+    top: 50px;
+    bottom: 0;
 }
 
 .body.horizontalMode {
-    bottom: 12px;
+
 }
 
 .sheet-container.left {
@@ -45,7 +45,6 @@ body {
 
 .sheet {
     background-color: #FFF;
-    height: 100%;
     margin: 6px;
 }
 

@@ -3,6 +3,7 @@
 require('normalize.css');
 require('./index.css');
 var React = require('react'),
+    Footer = require('./footer/footer'),
     Header = require('./header/header'),
     Login = require('./login/login'),
     Lesson = require('./lesson-sheet/lesson-sheet'),
@@ -39,6 +40,7 @@ var Body = React.createClass({
         return <div>
             <Header/>
             {this.renderLessonSpace()}
+            <Footer/>
         </div>;
     },
 
