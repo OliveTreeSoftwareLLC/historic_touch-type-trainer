@@ -37,7 +37,12 @@ var Body = React.createClass({
     },
 
     render() {
-        return <div>
+        var bodyClasses = cx({
+            'body': true,
+            'horizontalMode': this.state.horizontalMode
+        });
+
+        return <div className={bodyClasses}>
             <Header/>
             {this.renderLessonSpace()}
             <Footer/>
@@ -61,12 +66,7 @@ var Body = React.createClass({
             'top': !this.state.horizontalMode
         });
 
-        var bodyClasses = cx({
-            'body': true,
-            'horizontalMode': this.state.horizontalMode
-        })
-
-        return <div className={bodyClasses}>
+        return <div className='lesson-space'>
             <div className={lessonClasses}>
                 <Lesson className={lessonClasses}/>
             </div>
@@ -78,4 +78,4 @@ var Body = React.createClass({
     }
 });
 
-React.renderComponent(<Body />, document.getElementById('content'));
+React.renderComponent(<Body />, document.getElementById('content-holder'));
