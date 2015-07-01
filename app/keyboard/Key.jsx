@@ -52,11 +52,11 @@ module.exports = React.createClass({
       if (isFound)
         return 'right-index';
 
-      isFound = ["8", "I", "K", "<" ].indexOf(this.props.key1) >= 0
+      isFound = ["8", "I", "K", "," ].indexOf(this.props.key1) >= 0
       if (isFound)
         return 'right-middle';
 
-      isFound = ["9", "O", "L", ">" ].indexOf(this.props.key1) >= 0
+      isFound = ["9", "O", "L", "." ].indexOf(this.props.key1) >= 0
       if (isFound)
         return 'right-ring';
 

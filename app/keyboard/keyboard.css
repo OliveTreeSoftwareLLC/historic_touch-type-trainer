@@ -37,6 +37,10 @@
   background-color: #C89494;
 }
 
+.right-middle {
+    background-color: #49AA27;
+}
+
 ul#keyboard li {
   list-style-type: none;
   clear: both;
