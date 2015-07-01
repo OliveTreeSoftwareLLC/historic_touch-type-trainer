@@ -1,25 +1,42 @@
-/**
- * graphical keyboard layout, fixed size (664*230px)
- */
-
-ul#keyboard, ul#keyboard ul {
-  margin: 0;
-  padding: 0;
-  width: 664px;
-}
-ul#keyboard {
-  margin: 20px auto;
-  position: absolute;
-  bottom: 0;
-  height: 230px;
+.keyboard {
+  padding: 10px;
 }
 
+.key-row {
+  display: flex;
+  width: 725px;
+  justify-content: center;
+  align-items: center;
+}
 
-/******************************************************************************
- * Default Keyboard Geometry (pc104)
- */
+.key {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  border-style: solid;
+  border-color: #000;
+  border-width: 1px;
+  border-radius: 5px;
+  float: left;
+  min-width: 40px;
+  min-height: 40px;
+  margin: 2px;
+  padding: 2px;
+}
 
-/* rows */
+.key-label2 {
+  margin-right: 20px;
+}
+
+.key.fill-row {
+  flex: 1;
+}
+
+.home-key {
+  background-color: #C89494;
+}
+
 ul#keyboard li {
   list-style-type: none;
   clear: both;
