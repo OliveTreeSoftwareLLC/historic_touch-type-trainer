@@ -2,6 +2,10 @@ body {
     background-color: #7B7B7B;
 }
 
+p {
+    text-indent: 1em;
+}
+
 #content-holder {
     text-align: center;
     position: fixed;
@@ -33,7 +37,7 @@ body {
     flex: 1;
 }
 
-.sheet {
+.lesson-sheet, .work-sheet {
     background-color: #FFF;
     margin: 6px;
 }

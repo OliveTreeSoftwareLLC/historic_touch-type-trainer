@@ -45,10 +45,10 @@ var Body = React.createClass({
 
         return <div className='lesson-space'>
             <div className='sheet-container'>
-                <Lesson className='lesson-sheet'/>
+                <Work className='work-sheet'/>
             </div>
             <div className='sheet-container'>
-                <Work className='work-sheet'/>
+                <Lesson className='lesson-sheet'/>
             </div>
         </div>;
 

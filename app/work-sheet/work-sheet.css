@@ -1,0 +1,25 @@
+.work-sheet {
+    padding-bottom: 1em;
+}
+
+.work-title {
+    font-size: 1.5em;
+    padding-top: 1em;
+}
+
+.work-section {
+    text-align: left;
+}
+
+.section-title {
+    margin-left: 1em;
+    margin-bottom: 0;
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+.section-work {
+    font-family: courier;
+    margin-left: 2em;
+    margin-bottom: 3em;
+}

@@ -1,0 +1,31 @@
+.lesson-sheet {
+    padding-bottom: 1em;
+}
+
+.lesson-title {
+    font-size: 2em;
+    padding-top: 1em;
+}
+
+.lesson-section {
+    text-align: left;
+}
+
+.section-title {
+    margin-left: 1em;
+    margin-bottom: 0;
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+.section-instructions {
+    font-style: italic;
+    text-align: justify;
+    margin: 0 2em 1em 2em;
+}
+
+.section-work {
+    font-family: courier;
+    margin-left: 2em;
+    margin-bottom: 3em;
+}
