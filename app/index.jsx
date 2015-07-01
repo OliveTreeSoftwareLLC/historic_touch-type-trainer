@@ -9,7 +9,7 @@ var React = require('react'),
     Lesson = require('./lesson-sheet/lesson-sheet'),
     Work = require('./work-sheet/work-sheet'),
     AuthStore = require('./stores/AuthenticationStore');
-var cx = React.addons.classSet;
+var cx = require('classNames');
 
 var Body = React.createClass({
 
