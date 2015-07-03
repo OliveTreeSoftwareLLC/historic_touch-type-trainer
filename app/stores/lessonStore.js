@@ -21,7 +21,7 @@ var _lesson = {
             "id": "gobbledygookabc",
             "title": "Section 1",
             "instructions": "Just type whatever is in this section. There are no special instructions, I just want a paragraph here to see what its appearance is and to style it properly.",
-            "work": "jjf fj jf jjj fff jf jf fj jf jjfffj jf fj jf jjfffj jf"
+            "work": "fff jf jf fj jf jjf fj jf jjj fff jf jf fj jf jjfffj jf fj jf jjfffj jf fff jf jf fj jf"
         },
         {
             "id": "gobbledygookdef",

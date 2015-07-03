@@ -6,8 +6,8 @@ var React = require('react'),
     Footer = require('./footer/footer'),
     Header = require('./header/header'),
     Login = require('./login/login'),
-    Lesson = require('./lesson-sheet/lesson-sheet'),
-    Work = require('./work-sheet/work-sheet'),
+    Lesson = require('./sheets/lesson-sheet'),
+    Work = require('./sheets/work-sheet'),
     AuthStore = require('./stores/AuthenticationStore');
 var cx = require('classNames');
 

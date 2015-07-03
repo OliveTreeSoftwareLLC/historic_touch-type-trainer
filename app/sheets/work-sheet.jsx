@@ -1,8 +1,9 @@
 
 'use strict'
-require("./work-sheet.css")
+require("./sheet.css")
 var React = require('react');
 var Lesson = require('../stores/lessonStore');
+var Section = require('./section');
 module.exports = React.createClass({
 
     render() {
@@ -16,14 +17,9 @@ module.exports = React.createClass({
     },
 
     renderSection(section) {
-        return <div className='work-section'>
-            <div className='section-title'>
-                {section.title}
-            </div>
-            <div className='section-work'>
-                <input/>
-            </div>
-        </div>
+        return <Section sectionType='worksheet'
+            section={section}
+            hideWork='true' />;
     }
 });
 

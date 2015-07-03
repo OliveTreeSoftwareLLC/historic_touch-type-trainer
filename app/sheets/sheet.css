@@ -1,4 +1,5 @@
-.lesson-sheet {
+.lesson-sheet,
+.work-sheet {
     padding-bottom: 1em;
 }
 
@@ -7,7 +8,14 @@
     padding-top: 1em;
 }
 
-.lesson-section {
+.work-title {
+    font-size: 1.5em;
+    line-height: 2em;
+    padding-top: 1em;
+}
+
+.lesson-section,
+.worksheet-section {
     text-align: left;
 }
 
@@ -24,8 +32,17 @@
     margin: 0 2em 1em 2em;
 }
 
+.worksheet-section > .section-instructions {
+    color: #DFDFDF;
+}
+
 .section-work {
     font-family: courier;
-    margin-left: 2em;
-    margin-bottom: 3em;
+    margin: 0 2em 3em 2em;
+    padding: 2px;
 }
+
+.worksheet-section > .section-work {
+    border: 1px solid #000;
+}
+
