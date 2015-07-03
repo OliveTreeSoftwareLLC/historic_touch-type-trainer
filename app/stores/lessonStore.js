@@ -12,6 +12,10 @@ var _lesson = {
         "J"
     ],
     "showKeyboard": true,
+    "fingerGroupsToShow": [
+        "home-key",
+        "left-index",
+        "left-middle" ],
     "sections": [
         {
             "id": "gobbledygookabc",

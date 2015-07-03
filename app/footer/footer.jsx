@@ -3,6 +3,7 @@
 require("./footer.css")
 var React = require('react');
 var AuthStore = require('../stores/AuthenticationStore');
+var Lesson = require('../stores/lessonStore');
 var Keyboard = require('../keyboard/keyboard');
 
 module.exports = React.createClass({
@@ -33,6 +34,11 @@ module.exports = React.createClass({
         if (!this.state.isLoggedIn)
             return;
 
-        return <Keyboard/>
+        var lesson = Lesson.getLesson();
+
+        if (!lesson.showKeyboard)
+            return;
+
+        return <Keyboard fingerGroupsToShow={lesson.fingerGroupsToShow}/>
     }
 });

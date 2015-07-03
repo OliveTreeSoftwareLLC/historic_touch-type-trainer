@@ -9,9 +9,8 @@ module.exports = React.createClass({
 
       var classes = cx({
         'key': true,
-        'home-key': this.isHomeKey(),
         'fill-row': this.props.fill
-      }, this.getFingerGroup());
+      }, this.groupsToShow());
 
       return <div className={classes}>
         {this.renderKeyTwo()}
@@ -24,6 +23,19 @@ module.exports = React.createClass({
         return <div className='key-label2'>
           {this.props.key2}
         </div>
+    },
+
+    groupsToShow() {
+      if (!this.props.groupsToShow)
+        return null;
+
+      var group = this.getFingerGroup();
+      var show = this.props.groupsToShow;
+      if (show.indexOf(group) < 0)
+        group = null;
+      return cx({
+        'home-key': show.indexOf('home-key') >= 0 && this.isHomeKey()
+      }, group);
     },
 
     isHomeKey() {
