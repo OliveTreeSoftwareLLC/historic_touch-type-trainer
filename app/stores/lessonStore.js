@@ -3,6 +3,9 @@ var AppDispatcher = require('../dispatchers/AppDispatcher');
 var assign = require('object-assign');
 
 var CHANGE_EVENT = 'change';
+var ERRORS_EVENT = 'errors_change';
+
+var _errorData = [];
 
 var _lesson = {
     "id": "aksdjfas;kjkas;ajf",
@@ -68,6 +71,10 @@ var LessonStore = assign({}, EventEmitter.prototype, {
     }
   },
 
+  getErrorData: function() {
+    return _errorData;
+  },
+
   emitChange: function() {
     this.emit(CHANGE_EVENT);
   },
@@ -78,6 +85,18 @@ var LessonStore = assign({}, EventEmitter.prototype, {
 
   removeChangeListener: function(callback) {
     this.removeListener(CHANGE_EVENT, callback);
+  },
+
+  emitErrorChange: function() {
+    this.emit(ERRORS_EVENT);
+  },
+
+  addErrorChangeListener: function(callback) {
+    this.on(ERRORS_EVENT, callback);
+  },
+
+  removeErrorChangeListener: function(callback) {
+    this.removeListener(ERRORS_EVENT, callback);
   },
 
   dispatcherIndex: AppDispatcher.register(function(payload) {
@@ -101,6 +120,13 @@ var LessonStore = assign({}, EventEmitter.prototype, {
       case 'SET_NEXT_SECTION':
         LessonStore.setNextSection();
         LessonStore.emitChange();
+        break;
+
+      case 'STORE_KEY_ERROR':
+        if (action.errData) {
+          _errorData.push(action.errData);
+          LessonStore.emitErrorChange();
+        }
         break;
     }
     return true; // No errors. Needed by promise in Dispatcher.

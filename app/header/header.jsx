@@ -1,26 +1,35 @@
 
 'use strict'
 require("./header.css")
-var React = require('react'),
-    AuthStore = require('../stores/AuthenticationStore');
+var React = require('react');
+var AuthStore = require('../stores/AuthenticationStore');
+var LessonStore = require('../stores/lessonStore');
 var AppDispatcher = require('../dispatchers/AppDispatcher');
 
 module.exports = React.createClass({
 
     getInitialState() {
-        return { isLoggedIn: AuthStore.isLoggedIn() };
+        return { isLoggedIn: AuthStore.isLoggedIn(),
+            errorData: LessonStore.getErrorData()
+        };
     },
 
     componentDidMount() {
         AuthStore.addChangeListener(this._onChange);
+        LessonStore.addErrorChangeListener(this._onErrorChange);
     },
 
     componentWillUnmount() {
         AuthStore.removeChangeListener(this._onChange);
+        LessonStore.removeErrorChangeListener(this._onErrorChange);
     },
 
     _onChange() {
         this.setState({ isLoggedIn: AuthStore.isLoggedIn() });
+    },
+
+    _onErrorChange() {
+        this.setState({ errorData: LessonStore.getErrorData() });
     },
 
     render() {
@@ -33,7 +42,7 @@ module.exports = React.createClass({
     stats() {
         if (this.state.isLoggedIn === true)
             return <div className='stats'>
-                Errors: 0 WPM: 32
+                Errors: {this.errorCount()} WPM: 0
             </div>;
     },
 
@@ -53,5 +62,12 @@ module.exports = React.createClass({
         AppDispatcher.handleViewAction({
             actionType: 'LOGOUT'
         });
+    },
+
+    errorCount() {
+        if (this.state.errorData)
+            return this.state.errorData.length;
+        else
+            return 0;
     }
 });

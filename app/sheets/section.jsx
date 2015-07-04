@@ -16,7 +16,7 @@ module.exports = React.createClass({
             <p className='section-instructions'>
                 {this.props.section.instructions}
             </p>
-            <div id={this.props.sectionType + '-' + this.props.section.id}
+            <div id={this.getDivId()}
                 tabIndex='0'
                 contentEditable={this.props.hideWork}
                 onFocus={this.setActiveSection}
@@ -26,6 +26,10 @@ module.exports = React.createClass({
                 {this.renderWork()}
             </div>
         </div>
+    },
+
+    getDivId() {
+        return this.props.sectionType + '-' + this.props.section.id;
     },
 
     renderWork() {
@@ -39,8 +43,20 @@ module.exports = React.createClass({
     },
 
     handleKeyPress(e) {
-        if (e.keyCode >= 32 && e.keyCode <= 127)
-            alert(e.key);
+        if (e.charCode < 32 && e.charCode > 127)
+            return; //don't handle anything not in the normal range
+        var start =document.getElementById(this.getDivId()).innerText.length;
+        var correctKey = this.props.section.work.substring(start, start + 1);
+        if (e.key !== correctKey) {
+            e.preventDefault();
+
+            AppDispatcher.handleViewAction({
+                actionType: 'STORE_KEY_ERROR',
+                errData: { correctKey: correctKey, typeKey: e.key }
+            });
+        }
+        // correct key was pressed
+
     },
 
     setActiveSection() {
