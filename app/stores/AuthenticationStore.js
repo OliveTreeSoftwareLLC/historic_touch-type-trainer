@@ -73,7 +73,7 @@ var AuthStore = assign({}, EventEmitter.prototype, {
         AuthStore.emitChange();
         break;
 
-      // add more cases for other actionTypes, like TODO_UPDATE, etc.
+      // add more cases for other actionTypes
     }
 
     return true; // No errors. Needed by promise in Dispatcher.
