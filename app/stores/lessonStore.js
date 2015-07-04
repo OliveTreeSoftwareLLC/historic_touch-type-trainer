@@ -30,7 +30,7 @@ var _lesson = {
             "id": "gobbledygookdef",
             "title": "Section 2",
             "instructions": "You've done this before.",
-            "work": "fff jf jf fj jjf fj jf jjj jf jjfffj"
+            "work": "fff jj"
         },
         {
             "id": "gobbledygookghi",

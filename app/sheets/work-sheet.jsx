@@ -41,7 +41,8 @@ module.exports = React.createClass({
         return <Section sectionType='worksheet'
             section={section}
             hideWork='true'
-            activeSection={this.state.activeSection}/>;
+            activeSection={this.state.activeSection}
+            advanceToNextSection={this.advanceToNext}/>;
     },
 
     setFocus() {

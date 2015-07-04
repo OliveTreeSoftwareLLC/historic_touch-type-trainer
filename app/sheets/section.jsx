@@ -22,6 +22,7 @@ module.exports = React.createClass({
                 onFocus={this.setActiveSection}
                 onKeyDown={this.handleKeyDown}
                 onKeyPress={this.handleKeyPress}
+                onKeyUp={this.handleKeyUp}
                 className='section-work'>
                 {this.renderWork()}
             </div>
@@ -55,7 +56,12 @@ module.exports = React.createClass({
                 errData: { correctKey: correctKey, typeKey: e.key }
             });
         }
-        // correct key was pressed
+    },
+
+    handleKeyUp() {
+        var work = document.getElementById(this.getDivId()).innerText;
+        if (work === this.props.section.work)
+            this.props.advanceToNextSection();
 
     },
 

@@ -42,7 +42,7 @@ module.exports = React.createClass({
     stats() {
         if (this.state.isLoggedIn === true)
             return <div className='stats'>
-                Errors: {this.errorCount()} WPM: 0
+                Errors: {this.errorCount()}
             </div>;
     },
 
