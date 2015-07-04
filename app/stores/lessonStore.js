@@ -44,10 +44,28 @@ var _lesson = {
     ]
 };
 
+var _activeSection = _lesson.sections[0];
+
 var LessonStore = assign({}, EventEmitter.prototype, {
 
   getLesson: function() {
     return _lesson;
+  },
+
+  getActiveSection: function() {
+    return _activeSection;
+  },
+
+  setNextSection: function() {
+    if (!_activeSection)
+      _activeSection = _lesson.sections[0];
+    else {
+      var i = _lesson.sections.indexOf(_activeSection) + 1;
+      if (i === _lesson.sections.length)
+        alert('Finished with Lesson!');
+      else
+        _activeSection = _lesson.sections[i];
+    }
   },
 
   emitChange: function() {
@@ -63,6 +81,28 @@ var LessonStore = assign({}, EventEmitter.prototype, {
   },
 
   dispatcherIndex: AppDispatcher.register(function(payload) {
+    var action = payload.action;
+
+    switch(action.actionType) {
+      case 'SET_LESSON':
+        if (action.lesson) {
+          _lesson = action.lesson;
+          LessonStore.emitChange();
+        }
+        break;
+
+      case 'SET_ACTIVE_SECTION':
+        if (action.section && action.section !== _activeSection) {
+          _activeSection = action.section;
+          LessonStore.emitChange();
+        }
+        break;
+
+      case 'SET_NEXT_SECTION':
+        LessonStore.setNextSection();
+        LessonStore.emitChange();
+        break;
+    }
     return true; // No errors. Needed by promise in Dispatcher.
   })
 
