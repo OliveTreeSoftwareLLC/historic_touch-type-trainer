@@ -56,3 +56,4 @@ var Body = React.createClass({
 });
 
 React.renderComponent(<Body />, document.getElementById('content-holder'));
+document.body.setAttribute('spellcheck', false);
