@@ -1,8 +1,22 @@
 var React = require('react');
 var cx = require('classNames');
 var AppDispatcher = require('../dispatchers/AppDispatcher');
+var LessonStore = require('../stores/lessonStore');
 
 module.exports = React.createClass({
+
+    componentDidMount() {
+        LessonStore.addChangeListener(this._onChange);
+        this.setSelectionRange(0, 1);
+    },
+
+    componentWillUnmount() {
+        LessonStore.removeChangeListener(this._onChange);
+    },
+
+    _onChange() {
+        this.setSelectionRange(0, 1);
+    },
 
     render() {
         var classes = cx({
@@ -46,7 +60,7 @@ module.exports = React.createClass({
     handleKeyPress(e) {
         if (e.charCode < 32 && e.charCode > 127)
             return; //don't handle anything not in the normal range
-        var start =document.getElementById(this.getDivId()).innerText.length;
+        var start = document.getElementById(this.getDivId()).innerText.length;
         var correctKey = this.props.section.work.substring(start, start + 1);
         if (e.key !== correctKey) {
             e.preventDefault();
@@ -55,7 +69,9 @@ module.exports = React.createClass({
                 actionType: 'STORE_KEY_ERROR',
                 errData: { correctKey: correctKey, typeKey: e.key }
             });
+            return;
         }
+        this.setSelectionRange(start + 1, start + 2);
     },
 
     handleKeyUp() {
@@ -73,6 +89,22 @@ module.exports = React.createClass({
             actionType: 'SET_ACTIVE_SECTION',
             section: this.props.section
         });
+    },
+
+    setSelectionRange(start, end) {
+        var id = 'lesson-' + this.props.section.id;
+        var el = document.getElementById(id);
+
+        var text = el.innerText;
+        var first = text.slice(0, start);
+        var last = text.slice((text.length - end) * -1);
+        text = first.concat(
+                '<span class="highlight">',
+                text.slice(start, end),
+                '</span>',
+                last
+            );
+        el.innerHTML = text;
     }
 
 });

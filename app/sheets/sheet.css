@@ -47,9 +47,14 @@
 
 .section-work {
     border: 1px solid #FFF;
+    outline-color: #FFF;
 }
 
-.worksheet-section > .section-work{
+.section-work > .highlight {
+    border: 1px solid #000;
+}
+
+/*.worksheet-section > .section-work{
     border-color: #000;
 }
-
+*/
