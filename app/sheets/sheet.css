@@ -45,7 +45,11 @@
     padding: 2px;
 }
 
-.worksheet-section > .section-work {
-    border: 1px solid #000;
+.section-work {
+    border: 1px solid #FFF;
+}
+
+.worksheet-section > .section-work{
+    border-color: #000;
 }
 
