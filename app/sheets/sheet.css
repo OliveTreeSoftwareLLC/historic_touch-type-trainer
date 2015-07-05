@@ -43,15 +43,13 @@
     font-family: courier;
     margin: 0 1em 2em 1em;
     padding: 2px;
-}
-
-.section-work {
+    letter-spacing: 2px;
     border: 1px solid #FFF;
     outline-color: #FFF;
 }
 
 .section-work > .highlight {
-    border: 1px solid #000;
+    border: 2px solid #F00;
 }
 
 /*.worksheet-section > .section-work{
