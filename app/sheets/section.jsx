@@ -30,7 +30,7 @@ module.exports = React.createClass({
             <p className='section-instructions'>
                 {this.props.section.instructions}
             </p>
-            <div id={this.getDivId()}
+            <pre id={this.getDivId()}
                 tabIndex='0'
                 contentEditable={this.props.hideWork}
                 onFocus={this.setActiveSection}
@@ -39,7 +39,7 @@ module.exports = React.createClass({
                 onKeyUp={this.handleKeyUp}
                 className='section-work'>
                 {this.renderWork()}
-            </div>
+            </pre>
         </div>
     },
 
@@ -92,6 +92,9 @@ module.exports = React.createClass({
     },
 
     setSelectionRange(start, end) {
+        if (this.props.section.id !== this.props.activeSection.id)
+            return;
+
         var id = 'lesson-' + this.props.section.id;
         var el = document.getElementById(id);
 
