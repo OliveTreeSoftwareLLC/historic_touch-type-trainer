@@ -55,7 +55,8 @@ module.exports = React.createClass({
             actionType: 'SET_ACTIVE_SECTION',
             section: this.props.section
         });
-        this.setSelectionRange(0, 1);
+        var text = document.getElementById(this.getDivId()).innerText;
+        this.setSelectionRange(text.length, text.length + 1);
     },
 
     getDivId() {
