@@ -1,21 +1,8 @@
 var React = require('react');
 var cx = require('classNames');
 var AppDispatcher = require('../dispatchers/AppDispatcher');
-var LessonStore = require('../stores/lessonStore');
 
 module.exports = React.createClass({
-
-    componentDidMount() {
-        LessonStore.addChangeListener(this._onChange);
-    },
-
-    componentWillUnmount() {
-        LessonStore.removeChangeListener(this._onChange);
-    },
-
-    _onChange() {
-
-    },
 
     render() {
         var classes = cx({

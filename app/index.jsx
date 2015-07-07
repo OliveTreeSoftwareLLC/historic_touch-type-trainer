@@ -2,31 +2,46 @@
 'use strict'
 require('normalize.css');
 require('./index.css');
-var React = require('react'),
-    Footer = require('./footer/footer'),
-    Header = require('./header/header'),
-    Login = require('./login/login'),
-    Lesson = require('./sheets/lesson-sheet'),
-    Work = require('./sheets/work-sheet'),
-    AuthStore = require('./stores/AuthenticationStore');
+var React = require('react');
+var Footer = require('./footer/footer');
+var Header = require('./header/header');
+var Login = require('./login/login');
+var Lesson = require('./sheets/lesson-sheet');
+var LessonGrade = require('./modals/lesson-grade');
+var LessonStore = require('./stores/lessonStore');
+var Modal = require('./modals/modal');
+var ModalStore = require('./stores/modalStore');
+var Work = require('./sheets/work-sheet');
+var AuthStore = require('./stores/AuthenticationStore');
+var AppDispatcher = require('./dispatchers/AppDispatcher');
 var cx = require('classNames');
 
 var Body = React.createClass({
 
     getInitialState() {
-        return { isLoggedIn: AuthStore.isLoggedIn() };
+        return { isLoggedIn: AuthStore.isLoggedIn(),
+            modal: ModalStore.getModal()
+        };
     },
 
     componentDidMount() {
-        AuthStore.addChangeListener(this._onChange);
+        AuthStore.addChangeListener(this.handleAuthChange);
+        ModalStore.addChangeListener(this.handleModalChange);
+        LessonStore.addLessonCompleteChangeListener(this.handleLessonComplete);
     },
 
     componentWillUnmount() {
-        AuthStore.removeChangeListener(this._onChange);
+        AuthStore.removeChangeListener(this.handleAuthChange);
+        ModalStore.removeChangeListener(this.handleModalChange);
+        LessonStore.removeLessonCompleteChangeListener(this.handleLessonComplete);
     },
 
-    _onChange() {
+    handleAuthChange() {
         this.setState({ isLoggedIn: AuthStore.isLoggedIn() });
+    },
+
+    handleModalChange() {
+        this.setState({ modal: ModalStore.getModal() });
     },
 
     render() {
@@ -34,6 +49,7 @@ var Body = React.createClass({
             <Header/>
             {this.renderLessonSpace()}
             <Footer/>
+            {this.renderModal()}
         </div>;
     },
 
@@ -52,6 +68,19 @@ var Body = React.createClass({
             </div>
         </div>;
 
+    },
+
+    renderModal() {
+        return this.state.modal;
+    },
+
+    handleLessonComplete() {
+        if (LessonStore.isLessonComplete()) {
+            AppDispatcher.handleViewAction({
+                actionType: 'SET_MODAL',
+                modal: LessonGrade()
+            });
+        }
     }
 });
 

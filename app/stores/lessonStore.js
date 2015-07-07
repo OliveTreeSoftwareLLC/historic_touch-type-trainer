@@ -4,6 +4,7 @@ var assign = require('object-assign');
 
 var CHANGE_EVENT = 'change';
 var ERRORS_EVENT = 'errors_change';
+var LESSON_COMPLETE_EVENT = 'lessonComplete_change';
 
 var _errorData = [];
 
@@ -54,7 +55,7 @@ var _lesson = {
 };
 
 var _activeSection = _lesson.sections[0];
-
+var _lessonComplete = false;
 var LessonStore = assign({}, EventEmitter.prototype, {
 
   getLesson: function() {
@@ -70,8 +71,10 @@ var LessonStore = assign({}, EventEmitter.prototype, {
       _activeSection = _lesson.sections[0];
     else {
       var i = _lesson.sections.indexOf(_activeSection) + 1;
-      if (i === _lesson.sections.length)
-        alert('Finished with Lesson!');
+      if (i === _lesson.sections.length) {
+        _lessonComplete = true;
+        this.emitLessonCompleteChange();
+      }
       else
         _activeSection = _lesson.sections[i];
     }
@@ -79,6 +82,10 @@ var LessonStore = assign({}, EventEmitter.prototype, {
 
   getErrorData: function() {
     return _errorData;
+  },
+
+  isLessonComplete: function() {
+    return _lessonComplete;
   },
 
   emitChange: function() {
@@ -102,6 +109,18 @@ var LessonStore = assign({}, EventEmitter.prototype, {
   },
 
   removeErrorChangeListener: function(callback) {
+    this.removeListener(ERRORS_EVENT, callback);
+  },
+
+  emitLessonCompleteChange: function() {
+    this.emit(ERRORS_EVENT);
+  },
+
+  addLessonCompleteChangeListener: function(callback) {
+    this.on(ERRORS_EVENT, callback);
+  },
+
+  removeLessonCompleteChangeListener: function(callback) {
     this.removeListener(ERRORS_EVENT, callback);
   },
 

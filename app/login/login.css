@@ -4,9 +4,7 @@
     padding: 30px;
     padding-right: 40px;
     border-radius: 10px;
-    border-style: solid;
-    border-width: 3px;
-    border-color: #949494;
+    border-style: solid 3px #949494;
     box-shadow: 10px 10px 15px #323232;
     display: inline-block;
     width: 220px;
