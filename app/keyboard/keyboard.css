@@ -15,7 +15,7 @@
   align-items: center;
   flex-direction: column;
   border-style: solid;
-  border-color: #000;
+  border-color: #BDBDBD;
   border-width: 1px;
   border-radius: 5px;
   float: left;
@@ -34,37 +34,26 @@
 }
 
 .home-key {
-  box-shadow: inset 0px 0px 6px 2px #AA8739;
+  box-shadow: inset 0px 0px 23px 0px #6F8BB8;
+  border-color: #000;
 }
 
-.left-index {
-    background-color: #405390;
-}
-
-.left-middle {
-    background-color: #5368AF;
-}
-
+.left-index,
 .left-ring {
-    background-color: #405390;
+    background-color: #D2DDFF;
 }
 
+.left-middle,
 .left-pinky {
-    background-color: #5368AF;
+    background-color: #E2E2E2;
 }
 
-.right-index {
-    background-color: #49AA27;
-}
-
-.right-middle {
-    background-color: #49AA27;
-}
-
+.right-index,
 .right-ring {
-    background-color: #49AA27;
+    background-color: #E2E2E2;
 }
 
+.right-middle,
 .right-pinky {
-    background-color: #49AA27;
+    background-color: #D2DDFF;
 }

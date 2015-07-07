@@ -18,7 +18,13 @@ var _lesson = {
     "fingerGroupsToShow": [
         "home-key",
         "left-index",
-        "left-middle" ],
+        "left-middle",
+        "left-ring",
+        "left-pinky",
+        "right-index",
+        "right-middle",
+        "right-ring",
+        "right-pinky" ],
     "sections": [
         {
             "id": "gobbledygookabc",
