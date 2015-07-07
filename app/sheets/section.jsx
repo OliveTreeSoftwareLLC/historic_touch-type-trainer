@@ -7,7 +7,6 @@ module.exports = React.createClass({
 
     componentDidMount() {
         LessonStore.addChangeListener(this._onChange);
-        this.setSelectionRange(0, 1);
     },
 
     componentWillUnmount() {
@@ -15,7 +14,7 @@ module.exports = React.createClass({
     },
 
     _onChange() {
-        this.setSelectionRange(0, 1);
+
     },
 
     render() {
@@ -30,17 +29,33 @@ module.exports = React.createClass({
             <p className='section-instructions'>
                 {this.props.section.instructions}
             </p>
-            <pre id={this.getDivId()}
+            <div id={this.getDivId()}
                 tabIndex='0'
                 contentEditable={this.props.hideWork}
-                onFocus={this.setActiveSection}
+                onFocus={this.handleFocus}
                 onKeyDown={this.handleKeyDown}
                 onKeyPress={this.handleKeyPress}
                 onKeyUp={this.handleKeyUp}
+                onBlur={this.handleBlur}
                 className='section-work'>
                 {this.renderWork()}
-            </pre>
+            </div>
         </div>
+    },
+
+    handleBlur() {
+        this.setSelectionRange(0, 0);
+    },
+
+    handleFocus() {
+        if (this.props.sectionType === 'lesson')
+            return;
+
+        AppDispatcher.handleViewAction({
+            actionType: 'SET_ACTIVE_SECTION',
+            section: this.props.section
+        });
+        this.setSelectionRange(0, 1);
     },
 
     getDivId() {
@@ -52,26 +67,38 @@ module.exports = React.createClass({
             return this.props.section.work;
     },
 
+    isCorrectKey(typedKey) {
+        var txt = document.getElementById(this.getDivId()).innerText;
+        var start = txt.length;
+        var correctKey = this.props.section.work.substring(start, start + 1);
+        if (typedKey !== correctKey) {
+            AppDispatcher.handleViewAction({
+                actionType: 'STORE_KEY_ERROR',
+                errData: { correctKey: correctKey, typedKey: typedKey }
+            });
+            return false;
+        }
+        this.setSelectionRange(start + 1, start + 2);
+        return true;
+    },
+
     handleKeyDown(e) {
         if (e.keyCode >= 32 && e.keyCode <= 127)
             return; //allow key press to hand these
+        if (e.keyCode === 13) {
+            if (!this.isCorrectKey('\n'))
+                e.preventDefault();
+            return;
+        }
     },
 
     handleKeyPress(e) {
-        if (e.charCode < 32 && e.charCode > 127)
+        if (e.charCode < 32 || e.charCode > 127)
             return; //don't handle anything not in the normal range
-        var start = document.getElementById(this.getDivId()).innerText.length;
-        var correctKey = this.props.section.work.substring(start, start + 1);
-        if (e.key !== correctKey) {
+        if (!this.isCorrectKey(e.key)) {
             e.preventDefault();
-
-            AppDispatcher.handleViewAction({
-                actionType: 'STORE_KEY_ERROR',
-                errData: { correctKey: correctKey, typeKey: e.key }
-            });
             return;
         }
-        this.setSelectionRange(start + 1, start + 2);
     },
 
     handleKeyUp() {
@@ -81,32 +108,25 @@ module.exports = React.createClass({
 
     },
 
-    setActiveSection() {
-        if (!this.props.hideWork)
-            return;
-
-        AppDispatcher.handleViewAction({
-            actionType: 'SET_ACTIVE_SECTION',
-            section: this.props.section
-        });
-    },
-
     setSelectionRange(start, end) {
-        if (this.props.section.id !== this.props.activeSection.id)
-            return;
-
         var id = 'lesson-' + this.props.section.id;
         var el = document.getElementById(id);
-
         var text = el.innerText;
-        var first = text.slice(0, start);
-        var last = text.slice((text.length - end) * -1);
-        text = first.concat(
-                '<span class="highlight">',
-                text.slice(start, end),
-                '</span>',
-                last
-            );
+
+        if (start !== end) {
+            var first = text.slice(0, start);
+            var last = '';
+            if (end < text.length)
+                last = text.slice((text.length - end) * -1);
+
+            text = first.concat(
+                    '<span class="highlight">',
+                    text.slice(start, end),
+                    '</span>',
+                    last
+                );
+        }
+
         el.innerHTML = text;
     }
 

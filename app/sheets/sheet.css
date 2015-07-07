@@ -46,6 +46,7 @@
     letter-spacing: 2px;
     border: 1px solid #FFF;
     outline-color: #FFF;
+    white-space: pre-wrap;
 }
 
 .section-work > .highlight {
