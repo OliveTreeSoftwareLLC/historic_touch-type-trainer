@@ -15,23 +15,44 @@ module.exports = React.createClass({
     render() {
         return <Modal>
             <div className='lesson-grade'>
-                <table>
-                    <caption>Error Detail</caption>
-                    <tr>
-                        <th>Key</th>
-                        <th>Typed</th>
-                        <th>Count</th>
-                    </tr>
-                    {this.renderErrors()}
-                    <tfoot>
+                <div className='lesson-info'>
+                    <table>
+                        <caption>Lesson Detail</caption>
                         <tr>
-                            <td colSpan="2">Total</td>
-                            <td>{this.getTotalErrors()}</td>
+                            <th>Characters</th>
+                            <td>{LessonStore.getLessonCharCount()}</td>
                         </tr>
-                    </tfoot>
-                </table>
-                {this.renderButtons()}
+                        <tr>
+                            <th>Errors</th>
+                            <td>{LessonStore.getTotalErrors()}</td>
+                        </tr>
+                        <tfoot>
+                            <tr>
+                                <th>Score</th>
+                                <td>{LessonStore.getScore()}%</td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+                <div className='error-info'>
+                    <table>
+                        <caption>Error Detail</caption>
+                        <tr>
+                            <th>Key</th>
+                            <th>Typed</th>
+                            <th>Count</th>
+                        </tr>
+                        {this.renderErrors()}
+                        <tfoot>
+                            <tr>
+                                <td colSpan="2">Total</td>
+                                <td>{LessonStore.getTotalErrors()}</td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
             </div>
+            {this.renderButtons()}
         </Modal>;
     },
 
@@ -45,13 +66,6 @@ module.exports = React.createClass({
             <td>{err.typedKey}</td>
             <td>{err.count}</td>
         </tr>
-    },
-
-    getTotalErrors() {
-        var sum = this.state.errorData.reduce(function(total, err) {
-            return total.count + err.count
-        });
-        return sum;
     },
 
     renderButtons() {

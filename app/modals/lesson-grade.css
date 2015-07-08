@@ -4,8 +4,7 @@ table {
     border-collapse: collapse;
     border-spacing: 0;
     border: solid 1px #999999;
-    width: 100%;
-    margin-bottom: 10px;
+    margin: 10px;
 }
 
 table > caption {
@@ -38,7 +37,7 @@ td {
 }
 
 .lesson-grade {
-    min-width: 150px;
-    min-height: 100px;
+    display: flex;
     padding: 20px;
+    flex-direction: row;
 }

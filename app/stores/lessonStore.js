@@ -111,6 +111,26 @@ var LessonStore = assign({}, EventEmitter.prototype, {
     return _lessonComplete;
   },
 
+  getLessonCharCount: function() {
+    var sum = _lesson.sections.reduce(function(total, section) {
+        return total + section.work.length
+    }, 0);
+    return sum;
+  },
+
+  getTotalErrors: function() {
+    return _errorData.length;
+  },
+
+  getScore: function() {
+    if (!_lessonComplete)
+      return null;
+
+    var count = this.getLessonCharCount();
+    var errors = this.getTotalErrors();
+    return Math.round(100 - (errors / count * 100));
+  },
+
   emitChange: function() {
     this.emit(CHANGE_EVENT);
   },
