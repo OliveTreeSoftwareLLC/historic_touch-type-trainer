@@ -6,7 +6,11 @@ var CHANGE_EVENT = 'change';
 var ERRORS_EVENT = 'errors_change';
 var LESSON_COMPLETE_EVENT = 'lessonComplete_change';
 
-var _errorData = [];
+var _errorData = [ { correctKey: 'j', typedKey: 'k' },
+  { correctKey: 'j', typedKey: 'k' },
+  { correctKey: 'j', typedKey: 'k' },
+  { correctKey: 'a', typedKey: 'b' }
+];
 
 var _lesson = {
     "id": "aksdjfas;kjkas;ajf",
@@ -55,7 +59,7 @@ var _lesson = {
 };
 
 var _activeSection = _lesson.sections[0];
-var _lessonComplete = false;
+var _lessonComplete = true;
 var LessonStore = assign({}, EventEmitter.prototype, {
 
   getLesson: function() {
@@ -82,6 +86,25 @@ var LessonStore = assign({}, EventEmitter.prototype, {
 
   getErrorData: function() {
     return _errorData;
+  },
+
+  getErrorDataUnique: function() {
+    var unique = [];
+    var i = null;
+    _errorData.forEach(function (item) {
+      i = unique.map(function(el){
+              return el.correctKey + el.typedKey
+            }).indexOf(item.correctKey + item.typedKey);
+      if (i < 0)
+        unique.push({
+          correctKey: item.correctKey,
+          typedKey: item.typedKey,
+          count: 1
+        });
+      else
+        unique[i].count = unique[i].count + 1;
+    });
+    return unique;
   },
 
   isLessonComplete: function() {

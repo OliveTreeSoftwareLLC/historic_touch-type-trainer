@@ -28,6 +28,7 @@ var Body = React.createClass({
         AuthStore.addChangeListener(this.handleAuthChange);
         ModalStore.addChangeListener(this.handleModalChange);
         LessonStore.addLessonCompleteChangeListener(this.handleLessonComplete);
+        this.handleLessonComplete();
     },
 
     componentWillUnmount() {

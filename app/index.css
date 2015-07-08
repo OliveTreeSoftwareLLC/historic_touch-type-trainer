@@ -6,6 +6,11 @@ p {
     text-indent: 1em;
 }
 
+button {
+    min-width: 70px;
+    min-height: 30px;
+}
+
 #content-holder {
     text-align: center;
     position: fixed;

@@ -9,29 +9,49 @@ var LessonStore = require('../stores/lessonStore');
 module.exports = React.createClass({
 
     getInitialState() {
-        return { errorData: LessonStore.getErrorData() };
+        return { errorData: LessonStore.getErrorDataUnique() };
     },
 
     render() {
         return <Modal>
             <div className='lesson-grade'>
-                {this.renderErrors()}
-                Total Errors = {this.state.errorData.length}
+                <table>
+                    <caption>Error Detail</caption>
+                    <tr>
+                        <th>Key</th>
+                        <th>Typed</th>
+                        <th>Count</th>
+                    </tr>
+                    {this.renderErrors()}
+                    <tfoot>
+                        <tr>
+                            <td colSpan="2">Total</td>
+                            <td>{this.getTotalErrors()}</td>
+                        </tr>
+                    </tfoot>
+                </table>
                 {this.renderButtons()}
             </div>
         </Modal>;
     },
 
     renderErrors() {
-        return <div>
-            {this.state.errorData.map(this.renderError)}
-        </div>
+        return this.state.errorData.map(this.renderError);
     },
 
     renderError(err) {
-        return <div>
-            Should have typed; {err.correctKey} but instead typed: {err.typedKey}
-        </div>
+        return <tr>
+            <td>{err.correctKey}</td>
+            <td>{err.typedKey}</td>
+            <td>{err.count}</td>
+        </tr>
+    },
+
+    getTotalErrors() {
+        var sum = this.state.errorData.reduce(function(total, err) {
+            return total.count + err.count
+        });
+        return sum;
     },
 
     renderButtons() {
