@@ -79,11 +79,11 @@ var Body = React.createClass({
         if (LessonStore.isLessonComplete()) {
             AppDispatcher.handleViewAction({
                 actionType: 'SET_MODAL',
-                modal: LessonGrade()
+                modal: React.createElement(LessonGrade)
             });
         }
     }
 });
 
-React.renderComponent(<Body />, document.getElementById('content-holder'));
+React.render(<Body />, document.getElementById('content-holder'));
 document.body.setAttribute('spellcheck', false);

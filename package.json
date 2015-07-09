@@ -22,12 +22,12 @@
     "flux": "^2.0.3",
     "normalize.css": "^3.0.3",
     "object-assign": "^3.0.0",
-    "react": "~0.11.2"
+    "react": "^0.13.3"
   },
   "devDependencies": {
     "css-loader": "^0.15.1",
     "http-server": "~0.7.1",
-    "jsx-loader": "~0.11.2",
+    "jsx-loader": "^0.13.2",
     "style-loader": "^0.12.3",
     "webpack": "~1.4.4",
     "webpack-dev-server": "~1.6.5"

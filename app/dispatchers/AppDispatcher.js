@@ -1,8 +1,7 @@
 var Dispatcher = require('./Dispatcher');
+var assign = require('object-assign');
 
-var copyProperties = require('react/lib/copyProperties');
-
-var AppDispatcher = copyProperties(new Dispatcher(), {
+var AppDispatcher = assign({}, Dispatcher.prototype, {
 
   /**
    * @param {object} action The details of the action, including the action's
