@@ -13,11 +13,14 @@ module.exports = React.createClass({
     },
 
     render() {
-        return <Modal>
+        return <Modal footer={this.renderButtons()}>
             <div className='lesson-grade'>
                 <div className='lesson-info'>
                     <table>
                         <caption>Lesson Detail</caption>
+                        <tr>
+                            <th colSpan='2'>{LessonStore.getLesson().title}</th>
+                        </tr>
                         <tr>
                             <th>Characters</th>
                             <td>{LessonStore.getLessonCharCount()}</td>
@@ -52,7 +55,6 @@ module.exports = React.createClass({
                     </table>
                 </div>
             </div>
-            {this.renderButtons()}
         </Modal>;
     },
 
@@ -70,11 +72,18 @@ module.exports = React.createClass({
 
     renderButtons() {
         return <div>
-            <button onClick={this.handleClick}>OK</button>
+            <button onClick={this.handleRestart}>Redo Lesson</button>
+            <button onClick={this.handleNext}>Next Lesson</button>
         </div>;
     },
 
-    handleClick() {
+    handleRestart() {
+        AppDispatcher.handleViewAction({
+            actionType: 'CLEAR_MODAL'
+        });
+    },
+
+    handleNext() {
         AppDispatcher.handleViewAction({
             actionType: 'CLEAR_MODAL'
         });

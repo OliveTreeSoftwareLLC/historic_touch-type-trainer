@@ -9,6 +9,8 @@ p {
 button {
     min-width: 70px;
     min-height: 30px;
+    margin: 5px;
+    padding: 4px 10px;
 }
 
 #content-holder {

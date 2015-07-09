@@ -10,8 +10,8 @@
 
 .modal {
     display: flex;
-    justify-content:center;
-    align-items:center;
+    justify-content: center;
+    align-items: center;
     z-index: 100;
 }
 
@@ -21,10 +21,17 @@
 }
 
 .modal-content {
+    display: flex;
+    flex-direction: column;
     margin: auto;
     background-color: #FFF;
     border-radius: 5px;
     border: solid 1px #000;
     box-shadow: 10px 10px 15px #323232;
     z-index: 101;
+}
+
+.modal-footer {
+    margin-bottom: 10px;
+
 }

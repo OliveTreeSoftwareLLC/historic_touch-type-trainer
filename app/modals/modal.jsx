@@ -15,6 +15,13 @@ module.exports = React.createClass({
     renderContents() {
         return <div className='modal-content'>
             {this.props.children}
+            {this.renderFooter()}
+        </div>
+    },
+
+    renderFooter() {
+        return <div className='modal-footer'>
+            {this.props.footer}
         </div>
     }
 });
