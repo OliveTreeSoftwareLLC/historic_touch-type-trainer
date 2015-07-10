@@ -13,10 +13,18 @@
     transform: translateY(-50%);
 }
 
+.header svg {
+    fill: CurrentColor;
+    height: 20px;
+    width: 20px;
+    margin-left: 10px;
+}
+
 .stats {
     float: left;
 }
 
 .authentication {
+    display: flex;
     float: right;
 }
