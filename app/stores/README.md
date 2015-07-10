@@ -1,5 +1,6 @@
 # Lesson Object
 Lesson objects are composed of several properties.
+
 |Property|Value(s)|Notes
 --- | --- | ---
 id| 3997A7AB-DDB0-4477-A442-CF33F16A6F91| Must be unique for each lesson in the system.
