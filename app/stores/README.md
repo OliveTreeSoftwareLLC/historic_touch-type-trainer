@@ -8,8 +8,7 @@ scoreReq| 80| (optional) Forces redo of lesson until minimum score is attained.
 allowRedo| false| (optional) Used to force student to only do a lesson once.
 newKeys| [ "F","J"] | (optional) New keys taught by this lesson.
 showKeyboard| true | (optional) Show keyboard at the bottom of the screen.
-fingerGroupsToShow| [ "home-key", "left-index" ] | (optional but requires showKeyboard) Highlights
-finger groups on the onscreen keyboard. Additional groups are "left-middle" "left-ring" "left-pinky" "right-index" "right-middle" "right-ring" "right-pinky"
+fingerGroupsToShow| [ "home-key", "left-index" ] | (optional but requires showKeyboard) Highlights finger groups on the onscreen keyboard. Additional groups are "left-middle" "left-ring" "left-pinky" "right-index" "right-middle" "right-ring" "right-pinky"
 
 
 
