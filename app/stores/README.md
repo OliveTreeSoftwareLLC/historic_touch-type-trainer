@@ -1,5 +1,7 @@
 # Lesson Object
-Lesson objects are composed of several properties.
+
+
+###Lesson objects are composed of several properties.
 
 |Property|Value(s)|Notes
 --- | --- | ---
@@ -10,35 +12,14 @@ allowRedo| false| (optional) Used to force student to only do a lesson once.
 newKeys| [ "F","J"] | (optional) New keys taught by this lesson.
 showKeyboard| true | (optional) Show keyboard at the bottom of the screen.
 fingerGroupsToShow| [ "home-key", "left-index" ] | (optional but requires showKeyboard) Highlights finger groups on the onscreen keyboard. Additional groups are "left-middle" "left-ring" "left-pinky" "right-index" "right-middle" "right-ring" "right-pinky"
+sections | [ {section1}, {section2} ] | Array of at least one section. See below for section properties.
 
 
+###Lesson objects are composed of several properties.
 
-
-
-sections| [
-{
-id| gobbledygookabc|
-title| Section 1|
-instructions| Just type whatever is in this section. There are no special instructions| I just want a paragraph here to see what its appearance is and to style it properly.|
-work| fff
-}|
-{
-id| gobbledygookdef|
-title| Section 2|
-instructions| You've done this before.|
-work| jj
-}|
-{
-id| gobbledygookghi|
-title| Section 3|
-instructions| Do it once again.|
-work| fj
-}|
-{
-id| gobbledygookjkl|
-title| Section 4|
-instructions| Are you getting tired of this yet? Ha! just wait till you see the next lesson. You'll wish you were still doing this one!|
-work| fj
-}
-]
-}
+|Property|Value(s)|Notes
+--- | --- | ---
+id| 1 | Must be unique for each section in the lesson.
+title| Section 1| Title to show at the top of each section
+instructions| Type as swiftly as you can while still maintaining accuracy | These instructions will show at the top of the section for the student to read.
+work| fff jf fj | This is the actual text that the student will type.
