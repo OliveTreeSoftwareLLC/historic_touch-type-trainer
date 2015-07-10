@@ -6,6 +6,32 @@ var Modal = require('./modal');
 var AppDispatcher = require('../dispatchers/AppDispatcher');
 var LessonStore = require('../stores/lessonStore');
 
+var _lesson = {
+    "id": "aksdkas;ajf",
+    "title": "Lesson 2",
+    "scoreReq": 80,
+    "showKeyboard": true,
+    "newKeys": [
+        "D",
+        "K"
+    ],
+    "fingerGroupsToShow": [
+        "home-key" ],
+    "sections": [
+        {
+            "id": "1",
+            "title": "Section 1",
+            "instructions": "Just type whatever is in this section. There are no special instructions, I just want a paragraph here to see what its appearance is and to style it properly.",
+            "work": "dKd"
+        },
+        {
+            "id": "2",
+            "title": "Section 2",
+            "instructions": "Are you getting tired of this yet? Ha! just wait till you see the next lesson. You'll wish you were still doing this one!",
+            "work": "dd kk"
+        }
+    ]
+};
 module.exports = React.createClass({
 
     getInitialState() {
@@ -101,14 +127,21 @@ module.exports = React.createClass({
             actionType: 'SET_LESSON',
             lesson: lesson
         });
-        AppDispatcher.handleViewAction({
-            actionType: 'CLEAR_MODAL'
-        });
+        this.clearModal();
     },
 
     handleNext() {
         AppDispatcher.handleViewAction({
+            actionType: 'SET_LESSON',
+            lesson: _lesson
+        });
+        this.clearModal();
+    },
+
+    clearModal() {
+        AppDispatcher.handleViewAction({
             actionType: 'CLEAR_MODAL'
         });
+
     }
 });
