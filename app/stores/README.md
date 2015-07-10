@@ -15,7 +15,7 @@ fingerGroupsToShow| [ "home-key", "left-index" ] | (optional but requires showKe
 sections | [ {section1}, {section2} ] | Array of at least one section. See below for section properties.
 
 
-###Lesson objects are composed of several properties.
+###Section objects are composed of several properties.
 
 |Property|Value(s)|Notes
 --- | --- | ---
