@@ -9,7 +9,11 @@ var LessonStore = require('../stores/lessonStore');
 module.exports = React.createClass({
 
     getInitialState() {
-        return { errorData: LessonStore.getErrorDataUnique() };
+        return { errorData: LessonStore.getErrorDataUnique(),
+            scoreReq: LessonStore.getLesson().scoreReq,
+            score: LessonStore.getScore(),
+            allowRedo: LessonStore.getLesson().allowRedo
+        };
     },
 
     render() {
@@ -32,7 +36,7 @@ module.exports = React.createClass({
                         <tfoot>
                             <tr>
                                 <th>Score</th>
-                                <td>{LessonStore.getScore()}%</td>
+                                <td>{this.state.score}%</td>
                             </tr>
                         </tfoot>
                     </table>
@@ -72,9 +76,23 @@ module.exports = React.createClass({
 
     renderButtons() {
         return <div>
-            <button onClick={this.handleRestart}>Redo Lesson</button>
-            <button onClick={this.handleNext}>Next Lesson</button>
+            {this.renderRestart()}
+            {this.renderNext()}
         </div>;
+    },
+
+    renderNext() {
+        if (this.state.allowRedo === false || this.state.score >= this.state.scoreReq)
+            return <button onClick={this.handleNext}>Next Lesson</button>;
+        else
+            return null;
+    },
+
+    renderRestart() {
+        if (this.state.allowRedo === false)
+            return null;
+
+        return <button onClick={this.handleRestart}>Restart Lesson</button>;
     },
 
     handleRestart() {

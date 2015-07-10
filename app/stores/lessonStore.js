@@ -6,15 +6,13 @@ var CHANGE_EVENT = 'change';
 var ERRORS_EVENT = 'errors_change';
 var LESSON_COMPLETE_EVENT = 'lessonComplete_change';
 
-var _errorData = [ { correctKey: 'j', typedKey: 'k' },
-  { correctKey: 'j', typedKey: 'k' },
-  { correctKey: 'j', typedKey: 'k' },
-  { correctKey: 'a', typedKey: 'b' }
-];
+var _errorData = [ ];
 
 var _lesson = {
     "id": "aksdjfas;kjkas;ajf",
     "title": "Lesson 1",
+    "scoreReq": 80,
+    "allowRedo": false,
     "newKeys": [
         "F",
         "J"
@@ -35,31 +33,31 @@ var _lesson = {
             "id": "gobbledygookabc",
             "title": "Section 1",
             "instructions": "Just type whatever is in this section. There are no special instructions, I just want a paragraph here to see what its appearance is and to style it properly.",
-            "work": "fff jf jf fj jf jjf fj jf jjj fff jf jf fj jf"
+            "work": "fff"
         },
         {
             "id": "gobbledygookdef",
             "title": "Section 2",
             "instructions": "You've done this before.",
-            "work": "fff jj"
+            "work": "jj"
         },
         {
             "id": "gobbledygookghi",
             "title": "Section 3",
             "instructions": "Do it once again.",
-            "work": "fj jf jjfffj jjf fj jf jjj fff jf jf"
+            "work": "fj"
         },
         {
             "id": "gobbledygookjkl",
             "title": "Section 4",
             "instructions": "Are you getting tired of this yet? Ha! just wait till you see the next lesson. You'll wish you were still doing this one!",
-            "work": "fj jf jjfffj jjf fj jf jjj fff jf jf fff jf jf fj jjf fj jf jjj jf jjfffj jjf fj jf jjj fff jf jf fj jf jjfffj jf fj jf jjfffj jf"
+            "work": "fj"
         }
     ]
 };
 
-var _activeSection = _lesson.sections[0];
-var _lessonComplete = true;
+var _activeSection = null;
+var _lessonComplete = false;
 var LessonStore = assign({}, EventEmitter.prototype, {
 
   getLesson: function() {
@@ -67,6 +65,8 @@ var LessonStore = assign({}, EventEmitter.prototype, {
   },
 
   getActiveSection: function() {
+    if (!_activeSection)
+      LessonStore.setNextSection();
     return _activeSection;
   },
 
@@ -156,15 +156,15 @@ var LessonStore = assign({}, EventEmitter.prototype, {
   },
 
   emitLessonCompleteChange: function() {
-    this.emit(ERRORS_EVENT);
+    this.emit(LESSON_COMPLETE_EVENT);
   },
 
   addLessonCompleteChangeListener: function(callback) {
-    this.on(ERRORS_EVENT, callback);
+    this.on(LESSON_COMPLETE_EVENT, callback);
   },
 
   removeLessonCompleteChangeListener: function(callback) {
-    this.removeListener(ERRORS_EVENT, callback);
+    this.removeListener(LESSON_COMPLETE_EVENT, callback);
   },
 
   dispatcherIndex: AppDispatcher.register(function(payload) {
@@ -173,9 +173,11 @@ var LessonStore = assign({}, EventEmitter.prototype, {
     switch(action.actionType) {
       case 'SET_LESSON':
         if (action.lesson) {
-          _lesson = action.lesson;
           _lessonComplete = false;
           _errorData = [];
+          _activeSection = null;
+          _lesson = action.lesson;
+          LessonStore.setNextSection();
           LessonStore.emitLessonCompleteChange();
           LessonStore.emitErrorChange();
           LessonStore.emitChange();

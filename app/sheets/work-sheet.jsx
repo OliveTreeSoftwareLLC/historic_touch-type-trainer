@@ -15,17 +15,31 @@ module.exports = React.createClass({
 
     componentDidMount() {
         LessonStore.addChangeListener(this._onChange);
+        LessonStore.addLessonCompleteChangeListener(this.isCompleteChanged);
         this.setFocus();
     },
 
     componentWillUnmount() {
         LessonStore.removeChangeListener(this._onChange);
+        LessonStore.removeLessonCompleteChangeListener(this.isCompleteChanged);
     },
 
     _onChange() {
         this.setState({ lesson: LessonStore.getLesson(),
             activeSection: LessonStore.getActiveSection() });
         this.setFocus();
+    },
+
+    isCompleteChanged() {
+        if (LessonStore.isLessonComplete())
+            return;
+
+        this.state.lesson.sections.map(this.resetSection);
+    },
+
+    resetSection(section) {
+        var el = 'worksheet-' + section.id;
+        document.getElementById(el).innerText = '';
     },
 
     render() {
