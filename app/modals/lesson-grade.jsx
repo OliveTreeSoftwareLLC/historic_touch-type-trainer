@@ -126,16 +126,14 @@ module.exports = React.createClass({
         AppDispatcher.handleViewAction({
             actionType: 'SET_LESSON',
             lesson: lesson
-        });
-        this.clearModal();
+        }, this.clearModal());
     },
 
     handleNext() {
         AppDispatcher.handleViewAction({
             actionType: 'SET_LESSON',
             lesson: _lesson
-        });
-        this.clearModal();
+        }, this.clearModal());
     },
 
     clearModal() {

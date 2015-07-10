@@ -24,10 +24,13 @@ module.exports = React.createClass({
         LessonStore.removeLessonCompleteChangeListener(this.isCompleteChanged);
     },
 
+    componentDidUpdate() {
+        this.setFocus();
+    },
+
     _onChange() {
         this.setState({ lesson: LessonStore.getLesson(),
             activeSection: LessonStore.getActiveSection() });
-        this.setFocus();
     },
 
     isCompleteChanged() {
