@@ -78,6 +78,11 @@ module.exports = React.createClass({
     },
 
     handleRestart() {
+        var lesson = LessonStore.getLesson();
+        AppDispatcher.handleViewAction({
+            actionType: 'SET_LESSON',
+            lesson: lesson
+        });
         AppDispatcher.handleViewAction({
             actionType: 'CLEAR_MODAL'
         });

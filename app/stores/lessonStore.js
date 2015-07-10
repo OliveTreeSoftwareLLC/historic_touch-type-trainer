@@ -174,6 +174,10 @@ var LessonStore = assign({}, EventEmitter.prototype, {
       case 'SET_LESSON':
         if (action.lesson) {
           _lesson = action.lesson;
+          _lessonComplete = false;
+          _errorData = [];
+          LessonStore.emitLessonCompleteChange();
+          LessonStore.emitErrorChange();
           LessonStore.emitChange();
         }
         break;
