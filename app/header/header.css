@@ -20,6 +20,11 @@
     margin-left: 10px;
 }
 
+svg:hover {
+    fill: #FFF;
+    -webkit-transition: fill .5s;
+}
+
 .stats {
     float: left;
 }
