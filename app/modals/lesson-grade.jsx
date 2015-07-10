@@ -44,7 +44,7 @@ module.exports = React.createClass({
 
     render() {
         return <Modal footer={this.renderButtons()}>
-            <div className='lesson-grade'>
+            <div className='lesson-grade' onKeyDown={this.handleKeyDown}>
                 <div className='lesson-info'>
                     <table>
                         <caption>Lesson Detail</caption>
@@ -108,17 +108,43 @@ module.exports = React.createClass({
     },
 
     renderNext() {
-        if (this.state.allowRedo === false || this.state.score >= this.state.scoreReq)
+        if (this.mayDoNext() === true)
             return <button onClick={this.handleNext}>Next Lesson</button>;
         else
             return null;
     },
 
     renderRestart() {
-        if (this.state.allowRedo === false)
+        if (this.mayRestart() === true)
             return null;
 
         return <button onClick={this.handleRestart}>Restart Lesson</button>;
+    },
+
+    mayDoNext() {
+        return this.state.allowRedo === false || this.state.score >= this.state.scoreReq;
+    },
+
+    mayRestart() {
+        return this.state.allowRedo === false;
+    },
+
+    handleKeyDown(e) {
+        e.preventDefault();
+        switch (e.keyCode) {
+            case 13:
+                if (this.mayDoNext() === true)
+                    this.handleNext();
+                else {
+                    if (this.mayRestart() === true)
+                        this.handleRestart();
+                }
+                break;
+            case 27:
+                if (this.mayRestart() === true)
+                    this.handleRestart();
+                break;
+        }
     },
 
     handleRestart() {
