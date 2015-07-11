@@ -30,6 +30,7 @@ module.exports = React.createClass({
             <div className='lesson-title'>
                 {this.state.lesson.title}
             </div>
+            {this.renderNewKeys()}
             {this.state.lesson.sections.map(this.renderSection)}
         </div>;
     },
@@ -38,6 +39,15 @@ module.exports = React.createClass({
         return <Section sectionType='lesson'
             section={section}
             activeSection={this.state.activeSection}/>;
+    },
+
+    renderNewKeys() {
+        if (!this.state.lesson.newKeys || this.state.lesson.newKeys.length < 1)
+            return null;
+
+        return <div className='new-keys'>
+                New Keys taught in this lesson: {this.state.lesson.newKeys.map(function(key) { return key }).join(',')}
+            </div>;
     }
 });
 

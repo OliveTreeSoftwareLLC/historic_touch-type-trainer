@@ -33,25 +33,25 @@ var _lesson = {
             "id": "gobbledygookabc",
             "title": "Section 1",
             "instructions": "Just type whatever is in this section. There are no special instructions, I just want a paragraph here to see what its appearance is and to style it properly.",
-            "work": "fff"
+            "work": "fff jj fj jf jj ff jf jjf jjjf ffj jff jj"
         },
         {
             "id": "gobbledygookdef",
             "title": "Section 2",
             "instructions": "You've done this before.",
-            "work": "jj"
+            "work": "jj fff jf fj fj jjf jjf ff jf ffj fj"
         },
         {
             "id": "gobbledygookghi",
             "title": "Section 3",
             "instructions": "Do it once again.",
-            "work": "fj"
+            "work": "fj fj jf"
         },
         {
             "id": "gobbledygookjkl",
             "title": "Section 4",
             "instructions": "Are you getting tired of this yet? Ha! just wait till you see the next lesson. You'll wish you were still doing this one!",
-            "work": "fj"
+            "work": "fj jj jjj ff jjf ffj"
         }
     ]
 };
