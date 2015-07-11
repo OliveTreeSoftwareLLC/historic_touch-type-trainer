@@ -11,6 +11,13 @@ module.exports = React.createClass({
 
     render() {
         return <div className='keyboard'>
+          {this.renderMainKeys()}
+          {this.renderNumPad()}
+      </div>;
+    },
+
+    renderMainKeys() {
+      return <div className='keyboard-main'>
         <div className='key-row'>
           <Key key1='`' key2='~' groupsToShow={this.state.fingerGroupsToShow}/>
           <Key key1='1' key2='!' groupsToShow={this.state.fingerGroupsToShow}/>
@@ -81,7 +88,36 @@ module.exports = React.createClass({
           <Key key1='Menu' groupsToShow={this.state.fingerGroupsToShow}/>
           <Key key1='Ctrl' groupsToShow={this.state.fingerGroupsToShow}/>
         </div>
-      </div>;
+      </div>
+    },
+
+    renderNumPad() {
+      return <div className='keyboard-numPad'>
+        <div className='numpad-row'>
+          <Key key1='Num Lock' groupsToShow={this.state.fingerGroupsToShow}/>
+          <Key key1='/' groupsToShow={this.state.fingerGroupsToShow}/>
+          <Key key1='*' groupsToShow={this.state.fingerGroupsToShow}/>
+        </div>
+        <div className='numpad-row'>
+          <Key key1='7' key2='Home'  groupsToShow={this.state.fingerGroupsToShow}/>
+          <Key key1='8' key2='^'  groupsToShow={this.state.fingerGroupsToShow}/>
+          <Key key1='9' key2='PgUp'  groupsToShow={this.state.fingerGroupsToShow}/>
+        </div>
+        <div className='numpad-row'>
+          <Key key1='4' key2='<' groupsToShow={this.state.fingerGroupsToShow}/>
+          <Key key1='5' groupsToShow={this.state.fingerGroupsToShow}/>
+          <Key key1='6' key2='>' groupsToShow={this.state.fingerGroupsToShow}/>
+        </div>
+        <div className='numpad-row'>
+          <Key key1='1' key2='End'  groupsToShow={this.state.fingerGroupsToShow}/>
+          <Key key1='2' key2='|'  groupsToShow={this.state.fingerGroupsToShow}/>
+          <Key key1='3' key2='PgUp'  groupsToShow={this.state.fingerGroupsToShow}/>
+        </div>
+        <div className='numpad-row'>
+          <Key key1='0' key2='Ins' fill='true' groupsToShow={this.state.fingerGroupsToShow}/>
+          <Key key1='.' key2='Del' groupsToShow={this.state.fingerGroupsToShow}/>
+        </div>
+      </div>
     }
 });
 

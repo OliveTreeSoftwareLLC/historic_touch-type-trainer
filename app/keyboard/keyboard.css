@@ -1,10 +1,23 @@
 .keyboard {
   padding: 10px;
+  display: flex;
+}
+
+.keyboard-main,
+.keyboard-numPad {
+  margin: 10px;
 }
 
 .key-row {
   display: flex;
-  width: 725px;
+  width: 780px;
+  justify-content: center;
+  align-items: center;
+}
+
+.numpad-row {
+  display: flex;
+  width: 160px;
   justify-content: center;
   align-items: center;
 }
@@ -14,23 +27,23 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  border-style: solid;
-  border-color: #BDBDBD;
-  border-width: 1px;
+  border: solid 1px #BDBDBD;
   border-radius: 5px;
+  background: -webkit-linear-gradient(top, rgba(0,0,0,0) 0%,rgba(216,216,216,0.65) 100%);
+  box-shadow: #5F5E5E 1px 1px 1px;
   float: left;
   min-width: 40px;
   min-height: 40px;
-  margin: 2px;
+  margin: 4px;
   padding: 2px;
 }
 
-.key-label2 {
-  margin-right: 20px;
+.key-fillRow {
+  flex: 1;
 }
 
-.key.fill-row {
-  flex: 1;
+.modkey-label {
+  font-size: .75em;
 }
 
 .home-key {

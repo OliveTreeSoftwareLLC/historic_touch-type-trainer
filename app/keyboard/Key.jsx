@@ -9,18 +9,28 @@ module.exports = React.createClass({
 
       var classes = cx({
         'key': true,
-        'fill-row': this.props.fill
+        'key-fillRow': this.props.fill,
       }, this.groupsToShow());
+
+      var k1Classes = cx({
+        'key-label': true,
+        'modkey-label': this.props.key1.length > 1
+      });
 
       return <div className={classes}>
         {this.renderKeyTwo()}
-        <div className='key-label'>{this.props.key1}</div>
+        <div className={k1Classes}>{this.props.key1}</div>
       </div>
     },
 
     renderKeyTwo() {
+      var k2Classes = cx({
+        'key-label2': true,
+        'modkey-label': this.props.key2 && this.props.key2.length > 1
+      });
+
       if (this.props.key2)
-        return <div className='key-label2'>
+        return <div className={k2Classes}>
           {this.props.key2}
         </div>
     },

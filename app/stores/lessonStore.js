@@ -18,16 +18,6 @@ var _lesson = {
         "J"
     ],
     "showKeyboard": true,
-    "fingerGroupsToShow": [
-        "home-key",
-        "left-index",
-        "left-middle",
-        "left-ring",
-        "left-pinky",
-        "right-index",
-        "right-middle",
-        "right-ring",
-        "right-pinky" ],
     "sections": [
         {
             "id": "gobbledygookabc",
