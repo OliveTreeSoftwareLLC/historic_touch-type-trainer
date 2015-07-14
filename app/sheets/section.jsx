@@ -6,7 +6,7 @@ module.exports = React.createClass({
 
     render() {
         var classes = cx({
-            'active-section': this.props.activeSection.id === this.props.section.id
+            'active-section': this.props.isActive
         }, this.props.sectionType + '-section' );
 
         return <div className={classes}>

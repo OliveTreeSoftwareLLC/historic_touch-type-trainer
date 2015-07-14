@@ -38,7 +38,7 @@ module.exports = React.createClass({
     renderSection(section) {
         return <Section sectionType='lesson'
             section={section}
-            activeSection={this.state.activeSection}/>;
+            isActive={this.state.activeSection.id === section.id} />;
     },
 
     renderNewKeys() {
