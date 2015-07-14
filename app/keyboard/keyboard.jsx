@@ -10,13 +10,14 @@ module.exports = React.createClass({
     },
 
     render() {
+        var gts = this.state.groupsToShow;
         return <div className='keyboard'>
-          {this.renderMainKeys()}
-          {this.renderNumPad()}
+          {this.renderMainKeys(gts)}
+          {this.renderNumPad(gts)}
       </div>;
     },
 
-    renderMainKeys() {
+    renderMainKeys(gts) {
       return <div className='keyboard-main'>
         <div className='key-row'>
           <Key key1='`' key2='~' groupsToShow={this.state.fingerGroupsToShow}/>
@@ -91,7 +92,7 @@ module.exports = React.createClass({
       </div>
     },
 
-    renderNumPad() {
+    renderNumPad(gts) {
       return <div className='keyboard-numPad'>
         <div className='numpad-row'>
           <Key key1='Num Lock' groupsToShow={this.state.fingerGroupsToShow}/>
