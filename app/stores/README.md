@@ -23,3 +23,5 @@ id| 1 | Must be unique for each section in the lesson.
 title| Section 1| Title to show at the top of each section
 instructions| Type as swiftly as you can while still maintaining accuracy | These instructions will show at the top of the section for the student to read.
 work| fff jf fj | This is the actual text that the student will type.
+isTimed | true | (optional) Stopwatch style timer unless timeLimit is set.
+timeLimit | 1 | (optional requires isTimed) Makes timer a countdown timer instead of a stopwatch. Value is in minutes.
