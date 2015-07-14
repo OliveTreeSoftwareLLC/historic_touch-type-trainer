@@ -16,12 +16,14 @@ module.exports = React.createClass({
     componentDidMount() {
         LessonStore.addChangeListener(this._onChange);
         LessonStore.addLessonCompleteChangeListener(this.isCompleteChanged);
+        LessonStore.addTimersChangeListener(this.timersChanged);
         this.setFocus();
     },
 
     componentWillUnmount() {
         LessonStore.removeChangeListener(this._onChange);
         LessonStore.removeLessonCompleteChangeListener(this.isCompleteChanged);
+        LessonStore.removeTimersChangeListener(this.timersChanged);
     },
 
     componentDidUpdate() {
@@ -38,6 +40,10 @@ module.exports = React.createClass({
             return;
 
         this.state.lesson.sections.map(this.resetSection);
+    },
+
+    timersChanged() {
+        this.setState({ timers: LessonStore.getTimers() });
     },
 
     resetSection(section) {
@@ -60,6 +66,7 @@ module.exports = React.createClass({
             section={section}
             hideWork='true'
             activeSection={this.state.activeSection}
+            timer={this.state.timers}
             advanceToNextSection={this.advanceToNext}/>;
     },
 

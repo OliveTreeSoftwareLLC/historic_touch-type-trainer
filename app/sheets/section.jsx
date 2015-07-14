@@ -12,6 +12,7 @@ module.exports = React.createClass({
         return <div className={classes}>
             <div className='section-title'>
                 {this.props.section.title}
+                {this.renderTimer()}
             </div>
             <p className='section-instructions'>
                 {this.props.section.instructions}
@@ -50,6 +51,13 @@ module.exports = React.createClass({
         return this.props.sectionType + '-' + this.props.section.id;
     },
 
+    renderTimer() {
+        if (this.props.section.isTimed !== true)
+            return null;
+
+        return "timed";
+    },
+
     renderWork() {
         if (!this.props.hideWork)
             return this.props.section.work;
@@ -58,6 +66,11 @@ module.exports = React.createClass({
     isCorrectKey(typedKey) {
         var txt = document.getElementById(this.getDivId()).innerText;
         var start = txt.length;
+        if (start === 0 && this.props.section.isTimed)
+            AppDispatcher.handleViewAction({
+                actionType: 'SECTION_TIMER_START'
+            });
+
         var correctKey = this.props.section.work.substring(start, start + 1);
         if (typedKey !== correctKey) {
             AppDispatcher.handleViewAction({
@@ -91,8 +104,14 @@ module.exports = React.createClass({
 
     handleKeyUp() {
         var work = document.getElementById(this.getDivId()).innerText;
-        if (work === this.props.section.work)
+        if (work === this.props.section.work) {
+            if (this.props.section.isTimed)
+                AppDispatcher.handleViewAction({
+                    actionType: 'SECTION_TIMER_STOP'
+                });
+
             this.props.advanceToNextSection();
+        }
 
     },
 

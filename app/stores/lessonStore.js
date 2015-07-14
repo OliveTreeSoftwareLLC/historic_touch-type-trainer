@@ -4,10 +4,11 @@ var assign = require('object-assign');
 
 var CHANGE_EVENT = 'change';
 var ERRORS_EVENT = 'errors_change';
+var TIMERS_CHANGE_EVENT = 'timers_change';
 var LESSON_COMPLETE_EVENT = 'lessonComplete_change';
 
 var _errorData = [ ];
-
+var _timers = [];
 var _lesson = {
     "id": "aksdjfas;kjkas;ajf",
     "title": "Lesson 1",
@@ -22,6 +23,8 @@ var _lesson = {
         {
             "id": "gobbledygookabc",
             "title": "Section 1",
+            "isTimed": true,
+            "timeLimit": 1,
             "instructions": "Just type whatever is in this section. There are no special instructions, I just want a paragraph here to see what its appearance is and to style it properly.",
             "work": "fff jj fj jf jj ff jf jjf jjjf ffj jff jj"
         },
@@ -112,6 +115,10 @@ var LessonStore = assign({}, EventEmitter.prototype, {
     return _errorData.length;
   },
 
+  getTimers: function() {
+    return _timers;
+  },
+
   getScore: function() {
     if (!_lessonComplete)
       return null;
@@ -157,19 +164,40 @@ var LessonStore = assign({}, EventEmitter.prototype, {
     this.removeListener(LESSON_COMPLETE_EVENT, callback);
   },
 
+  emitTimersChange: function() {
+    this.emit(TIMERS_CHANGE_EVENT);
+  },
+
+  addTimersChangeListener: function(callback) {
+    this.on(TIMERS_CHANGE_EVENT, callback);
+  },
+
+  removeTimersChangeListener: function(callback) {
+    this.removeListener(TIMERS_CHANGE_EVENT, callback);
+  },
+
   dispatcherIndex: AppDispatcher.register(function(payload) {
     var action = payload.action;
 
     switch(action.actionType) {
+      case 'SECTION_TIMER_START':
+        if (_activeSection.isTimed) {
+          _timers.push({ id: _activeSection.id, start: "now" })
+          LessonStore.emitTimersChange();
+        }
+        break;
+
       case 'SET_LESSON':
         if (action.lesson) {
           _lessonComplete = false;
           _errorData = [];
+          _timers = [];
           _activeSection = null;
           _lesson = action.lesson;
           LessonStore.setNextSection();
           LessonStore.emitLessonCompleteChange();
           LessonStore.emitErrorChange();
+          LessonStore.emitTimersChange();
           LessonStore.emitChange();
         }
         break;
