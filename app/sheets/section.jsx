@@ -10,8 +10,8 @@ module.exports = React.createClass({
         }, this.props.sectionType + '-section' );
 
         return <div className={classes}>
-            <div className='section-title'>
-                {this.props.section.title}
+            <div className='section-header'>
+                {this.renderTitle()}
                 {this.renderTimer()}
             </div>
             <p className='section-instructions'>
@@ -51,11 +51,28 @@ module.exports = React.createClass({
         return this.props.sectionType + '-' + this.props.section.id;
     },
 
+    renderTitle() {
+        return <div className='section-title'>
+            {this.props.section.title}
+        </div>
+    },
+
     renderTimer() {
         if (this.props.section.isTimed !== true)
             return null;
 
-        return "timed";
+        var timer = null
+        if (!this.props.timer) { //not started yet
+            timer = "Type to start timer."
+            if (this.props.section.timeLimit)
+                timer = timer + " You will have " + this.props.section.timeLimit + " minute.";
+        }
+        else
+            timer = "timer running"
+
+        return <div className='section-timer'>
+            {timer}
+        </div>;
     },
 
     renderWork() {
