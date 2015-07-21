@@ -24,7 +24,7 @@ var _lesson = {
             "id": "gobbledygookabc",
             "title": "Section 1",
             "isTimed": true,
-            "timeLimit": 1,
+            "timeLimit": 2,
             "instructions": "Just type whatever is in this section. There are no special instructions, I just want a paragraph here to see what its appearance is and to style it properly.",
             "work": "fff jj fj jf jj ff jf jjf jjjf ffj jff jj"
         },
@@ -180,9 +180,9 @@ var LessonStore = assign({}, EventEmitter.prototype, {
     var action = payload.action;
 
     switch(action.actionType) {
-      case 'SECTION_TIMER_START':
+      case 'ADD_TIMER':
         if (_activeSection.isTimed) {
-          _timers.push({ id: _activeSection.id, start: "now" })
+          _timers.push( action.timer );
           LessonStore.emitTimersChange();
         }
         break;
