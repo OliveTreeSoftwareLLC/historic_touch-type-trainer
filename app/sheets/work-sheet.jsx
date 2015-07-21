@@ -66,7 +66,6 @@ module.exports = React.createClass({
             section={section}
             hideWork='true'
             isActive={this.state.activeSection.id === section.id}
-            timer={this.state.timers}
             advanceToNextSection={this.advanceToNext}/>;
     },
 

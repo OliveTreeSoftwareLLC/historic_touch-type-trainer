@@ -3,6 +3,9 @@ var cx = require('classNames');
 var AppDispatcher = require('../dispatchers/AppDispatcher');
 
 module.exports = React.createClass({
+    getInitialState() {
+        return { timer: null }
+    },
 
     render() {
         var classes = cx({
@@ -62,10 +65,13 @@ module.exports = React.createClass({
             return null;
 
         var timer = null
-        if (!this.props.timer) { //not started yet
+        if (!this.state.timer) { //not started yet
             timer = " Type to start timer."
-            if (this.props.section.timeLimit)
-                timer = timer + " You will have " + this.props.section.timeLimit + " minute.";
+            if (this.props.section.timeLimit){
+                var suffix = this.props.section.timeLimit > 1 ? "s." : "."
+                timer = timer + " You will have " +
+                    this.props.section.timeLimit + " minute" + suffix;
+            }
         }
         else
             timer = " timer running..."
@@ -87,9 +93,7 @@ module.exports = React.createClass({
         var txt = document.getElementById(this.getDivId()).innerText;
         var start = txt.length;
         if (start === 0 && this.props.section.isTimed)
-            AppDispatcher.handleViewAction({
-                actionType: 'SECTION_TIMER_START'
-            });
+            this.startTimer();
 
         var correctKey = this.props.section.work.substring(start, start + 1);
         if (typedKey !== correctKey) {
@@ -155,6 +159,26 @@ module.exports = React.createClass({
         }
 
         el.innerHTML = text;
+    },
+
+    startTimer() {
+        this.setState({ timer: { sectionId: this.props.sectionId,
+            start: "now",
+        }});
+    },
+
+    timerTick() {
+
+    },
+
+    stopTimer() {
+        var timer = this.state.timer;
+        //TODO add properties such as words per minute to timer
+        //before pushing it to lesson store.
+        AppDispatcher.handleViewAction({
+            actionType: 'ADD_TIMER',
+            timer: timer
+        });
     }
 
 });
