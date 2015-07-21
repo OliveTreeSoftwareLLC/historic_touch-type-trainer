@@ -63,12 +63,12 @@ module.exports = React.createClass({
 
         var timer = null
         if (!this.props.timer) { //not started yet
-            timer = "Type to start timer."
+            timer = " Type to start timer."
             if (this.props.section.timeLimit)
                 timer = timer + " You will have " + this.props.section.timeLimit + " minute.";
         }
         else
-            timer = "timer running"
+            timer = " timer running..."
 
         return <div className='section-timer'>
             <svg xmlns="http://www.w3.org/2000/svg" width="8" height="8" viewBox="0 0 8 8">

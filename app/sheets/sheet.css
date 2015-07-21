@@ -35,6 +35,12 @@
 
 .section-timer {
     margin-left: 10px;
+    color: #919191;
+}
+
+.section-timer svg {
+    width: 15px;
+    height: 15px;
 }
 
 .section-instructions {
