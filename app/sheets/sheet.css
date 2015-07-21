@@ -46,7 +46,7 @@
 .section-instructions {
     font-style: italic;
     text-align: justify;
-    margin: 0 2em 1em 2em;
+    margin: 5px 2em 1em 2em;
 }
 
 .worksheet-section > .section-instructions {
