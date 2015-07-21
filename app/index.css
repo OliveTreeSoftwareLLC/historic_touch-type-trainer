@@ -33,6 +33,11 @@ button {
     overflow-y: auto;
     height: 0px;
     display: flex;
+    flex-direction: column;
+}
+
+.sheet-space {
+    display: flex;
     flex-direction: row;
 }
 

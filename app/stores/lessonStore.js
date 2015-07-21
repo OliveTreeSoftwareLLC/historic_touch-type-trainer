@@ -19,6 +19,7 @@ var _lesson = {
         "J"
     ],
     "showKeyboard": true,
+    "hasIntroduction": true,
     "sections": [
         {
             "id": "gobbledygookabc",

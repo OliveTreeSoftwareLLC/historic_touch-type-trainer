@@ -7,7 +7,8 @@
 --- | --- | ---
 id| 3997A7AB-DDB0-4477-A442-CF33F16A6F91| Must be unique for each lesson in the system.
 title| Lesson 1| Title to show at the top of the page and in the index.
-scoreReq| 80| (optional) Forces redo of lesson until minimum score is attained.
+hasIntroduction| true | (optional) Shows an introduction to the lesson by loading a web page from location/getintro?id=lessonId into an iframe above the lesson and work sheets.
+scoreReq| 80 | (optional) Forces redo of lesson until minimum score is attained.
 allowRedo| false| (optional) Used to force student to only do a lesson once.
 newKeys| [ "F","J"] | (optional) New keys taught by this lesson.
 showKeyboard| true | (optional) Show keyboard at the bottom of the screen.

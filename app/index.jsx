@@ -29,6 +29,7 @@ var Body = React.createClass({
         ModalStore.addChangeListener(this.handleModalChange);
         LessonStore.addLessonCompleteChangeListener(this.handleLessonComplete);
         this.handleLessonComplete();
+        this.renderIntro();
     },
 
     componentWillUnmount() {
@@ -61,14 +62,36 @@ var Body = React.createClass({
             </div>;
 
         return <div className='lesson-space'>
-            <div className='sheet-container'>
-                <Work className='work-sheet'/>
+            <div id="intro" className='intro-space'>
             </div>
-            <div className='sheet-container'>
-                <Lesson className='lesson-sheet'/>
+            <div className='sheet-space'>
+                <div className='sheet-container'>
+                    <Work className='work-sheet'/>
+                </div>
+                <div className='sheet-container'>
+                    <Lesson className='lesson-sheet'/>
+                </div>
             </div>
         </div>;
 
+    },
+
+    renderIntro() {
+        return;
+        var lesson = LessonStore.getLesson();
+        if (this.state.isLoggedIn != true || !lesson || lesson.hasIntroduction != true)
+            return;
+
+        var intro = document.getElementById("intro");
+        var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function() {
+        if (xhr.readyState != 4) return;
+        if (xhr.status != 200) alert(xhr.status);
+             intro.innerHTML = "<img src='../assets/pic.jpg'/>"
+             //intro.innerHTML = xhr.responseText;
+        };
+        xhr.open("GET", "../getintro?id=" + lesson.id, true);
+        xhr.send(null);
     },
 
     renderModal() {
