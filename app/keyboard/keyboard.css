@@ -8,6 +8,10 @@
   margin: 10px;
 }
 
+.keyboard-numPad {
+  display: flex;
+}
+
 .key-row {
   display: flex;
   width: 780px;
@@ -15,9 +19,17 @@
   align-items: center;
 }
 
+.numpad-column {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 270px;
+}
+
 .numpad-row {
   display: flex;
-  width: 160px;
+  width: 162px;
   justify-content: center;
   align-items: center;
 }
