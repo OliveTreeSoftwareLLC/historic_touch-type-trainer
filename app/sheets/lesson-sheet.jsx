@@ -46,7 +46,7 @@ module.exports = React.createClass({
             return null;
 
         return <div className='new-keys'>
-                New Keys taught in this lesson: {this.state.lesson.newKeys.map(function(key) { return key }).join(',')}
+                New Keys taught in this lesson: {this.state.lesson.newKeys.map(function(key) { return key }).join(', ')}
             </div>;
     }
 });
