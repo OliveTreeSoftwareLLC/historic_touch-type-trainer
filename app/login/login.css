@@ -15,3 +15,8 @@
     margin-top: 10px;
     float: right;
 }
+
+.login-error {
+    color: #FF5151;
+    margin-bottom: 5px;
+}
