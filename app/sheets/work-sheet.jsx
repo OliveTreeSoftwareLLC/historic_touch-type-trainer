@@ -39,7 +39,7 @@ module.exports = React.createClass({
         if (LessonStore.isLessonComplete())
             return;
 
-        this.state.lesson.sections.map(this.resetSection);
+        this.state.lesson.Sections.map(this.resetSection);
     },
 
     timersChanged() {
@@ -47,17 +47,17 @@ module.exports = React.createClass({
     },
 
     resetSection(section) {
-        var el = 'worksheet-' + section.id;
+        var el = 'worksheet-' + section.Id;
         document.getElementById(el).innerText = '';
     },
 
     render() {
         return <div className='work-sheet'>
             <div className='work-title'>
-                Worksheet for: {this.state.lesson.title}
+                Worksheet for: {this.state.lesson.Title}
             </div>
             {this.renderNewKeys()}
-            {this.state.lesson.sections.map(this.renderSection)}
+            {this.state.lesson.Sections.map(this.renderSection)}
         </div>;
     },
 
@@ -65,22 +65,22 @@ module.exports = React.createClass({
         return <Section sectionType='worksheet'
             section={section}
             hideWork='true'
-            isActive={this.state.activeSection.id === section.id}
+            isActive={this.state.activeSection.Id === section.Id}
             advanceToNextSection={this.advanceToNext}/>;
     },
 
     renderNewKeys() {
-        if (!this.state.lesson.newKeys || this.state.lesson.newKeys.length < 1)
+        if (!this.state.lesson.NewKeys || this.state.lesson.NewKeys.length < 1)
             return null;
 
         return <div className='new-keys'>
-                New Keys taught in this lesson: {this.state.lesson.newKeys.map(function(key) { return key }).join(', ')}
+                New Keys taught in this lesson: {this.state.lesson.NewKeys.map(function(key) { return key }).join(', ')}
             </div>;
     },
 
     setFocus() {
         //must use LessonStore at this point to make sure we have the current value
-        var el = 'worksheet-' + LessonStore.getActiveSection().id;
+        var el = 'worksheet-' + LessonStore.getActiveSection().Id;
         document.getElementById(el).focus();
     },
 

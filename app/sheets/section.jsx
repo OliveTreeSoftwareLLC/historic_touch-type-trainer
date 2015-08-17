@@ -51,26 +51,26 @@ module.exports = React.createClass({
     },
 
     getDivId() {
-        return this.props.sectionType + '-' + this.props.section.id;
+        return this.props.sectionType + '-' + this.props.section.Id;
     },
 
     renderTitle() {
         return <div className='section-title'>
-            {this.props.section.title}
+            {this.props.section.Title}
         </div>
     },
 
     renderTimer() {
-        if (this.props.section.isTimed !== true)
+        if (this.props.section.IsTimed !== true)
             return null;
 
         var timer = null
         if (!this.state.timer) { //not started yet
             timer = " Type to start timer."
-            if (this.props.section.timeLimit){
-                var suffix = this.props.section.timeLimit > 1 ? "s." : "."
+            if (this.props.section.TimeLimit){
+                var suffix = this.props.section.TimeLimit > 1 ? "s." : "."
                 timer = timer + " You will have " +
-                    this.props.section.timeLimit + " minute" + suffix;
+                    this.props.section.TimeLimit + " minute" + suffix;
             }
         }
         else
@@ -86,16 +86,16 @@ module.exports = React.createClass({
 
     renderWork() {
         if (!this.props.hideWork)
-            return this.props.section.work;
+            return this.props.section.Work;
     },
 
     isCorrectKey(typedKey) {
         var txt = document.getElementById(this.getDivId()).innerText;
         var start = txt.length;
-        if (start === 0 && this.props.section.isTimed)
+        if (start === 0 && this.props.section.IsTimed)
             this.startTimer();
 
-        var correctKey = this.props.section.work.substring(start, start + 1);
+        var correctKey = this.props.section.Work.substring(start, start + 1);
         if (typedKey !== correctKey) {
             AppDispatcher.handleViewAction({
                 actionType: 'STORE_KEY_ERROR',
@@ -128,8 +128,8 @@ module.exports = React.createClass({
 
     handleKeyUp() {
         var work = document.getElementById(this.getDivId()).innerText;
-        if (work === this.props.section.work) {
-            if (this.props.section.isTimed)
+        if (work === this.props.section.Work) {
+            if (this.props.section.IsTimed)
                 AppDispatcher.handleViewAction({
                     actionType: 'SECTION_TIMER_STOP'
                 });
@@ -140,7 +140,7 @@ module.exports = React.createClass({
     },
 
     setSelectionRange(start, end) {
-        var id = 'lesson-' + this.props.section.id;
+        var id = 'lesson-' + this.props.section.Id;
         var el = document.getElementById(id);
         var text = el.innerText;
 

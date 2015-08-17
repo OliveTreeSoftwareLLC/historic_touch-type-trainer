@@ -7,28 +7,28 @@ var AppDispatcher = require('../dispatchers/AppDispatcher');
 var LessonStore = require('../stores/lessonStore');
 
 var _lesson = {
-    "id": "aksdkas;ajf",
-    "title": "Lesson 2",
-    "scoreReq": 80,
-    "showKeyboard": true,
-    "newKeys": [
+    "Id": "aksdkas;ajf",
+    "Title": "Lesson 2",
+    "ScoreReq": 80,
+    "ShowKeyboard": true,
+    "NewKeys": [
         "D",
         "K"
     ],
-    "fingerGroupsToShow": [
+    "FingerGroupsToShow": [
         "home-key" ],
-    "sections": [
+    "Sections": [
         {
-            "id": "1",
-            "title": "Section 1",
-            "instructions": "Just type whatever is in this section. There are no special instructions, I just want a paragraph here to see what its appearance is and to style it properly.",
-            "work": "dKd"
+            "Id": "1",
+            "Title": "Section 1",
+            "Instructions": "Just type whatever is in this section. There are no special instructions, I just want a paragraph here to see what its appearance is and to style it properly.",
+            "Work": "dKd"
         },
         {
-            "id": "2",
-            "title": "Section 2",
-            "instructions": "Are you getting tired of this yet? Ha! just wait till you see the next lesson. You'll wish you were still doing this one!",
-            "work": "dd kk"
+            "Id": "2",
+            "Title": "Section 2",
+            "Instructions": "Are you getting tired of this yet? Ha! just wait till you see the next lesson. You'll wish you were still doing this one!",
+            "Work": "dd kk"
         }
     ]
 };
@@ -36,9 +36,9 @@ module.exports = React.createClass({
 
     getInitialState() {
         return { errorData: LessonStore.getErrorDataUnique(),
-            scoreReq: LessonStore.getLesson().scoreReq,
+            scoreReq: LessonStore.getLesson().ScoreReq,
             score: LessonStore.getScore(),
-            allowRedo: LessonStore.getLesson().allowRedo
+            allowRedo: LessonStore.getLesson().AllowRedo
         };
     },
 
@@ -49,7 +49,7 @@ module.exports = React.createClass({
                     <table>
                         <caption>Lesson Detail</caption>
                         <tr>
-                            <th colSpan='2'>{LessonStore.getLesson().title}</th>
+                            <th colSpan='2'>{LessonStore.getLesson().Title}</th>
                         </tr>
                         <tr>
                             <th>Characters</th>

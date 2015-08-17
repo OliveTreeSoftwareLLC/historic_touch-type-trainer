@@ -28,25 +28,25 @@ module.exports = React.createClass({
     render() {
         return <div className='lesson-sheet'>
             <div className='lesson-title'>
-                {this.state.lesson.title}
+                {this.state.lesson.Title}
             </div>
             {this.renderNewKeys()}
-            {this.state.lesson.sections.map(this.renderSection)}
+            {this.state.lesson.Sections.map(this.renderSection)}
         </div>;
     },
 
     renderSection(section) {
         return <Section sectionType='lesson'
             section={section}
-            isActive={this.state.activeSection.id === section.id} />;
+            isActive={this.state.activeSection.Id === section.Id} />;
     },
 
     renderNewKeys() {
-        if (!this.state.lesson.newKeys || this.state.lesson.newKeys.length < 1)
+        if (!this.state.lesson.NewKeys || this.state.lesson.NewKeys.length < 1)
             return null;
 
         return <div className='new-keys'>
-                New Keys taught in this lesson: {this.state.lesson.newKeys.map(function(key) { return key }).join(', ')}
+                New Keys taught in this lesson: {this.state.lesson.NewKeys.map(function(key) { return key }).join(', ')}
             </div>;
     }
 });

@@ -10,42 +10,45 @@ var LESSON_COMPLETE_EVENT = 'lessonComplete_change';
 var _errorData = [ ];
 var _timers = [];
 var _lesson = {
-    "id": "aksdjfas;kjkas;ajf",
-    "title": "Lesson 1",
-    "scoreReq": 80,
-    "allowRedo": false,
-    "newKeys": [
+    "Id": "aksdjfas;kjkas;ajf",
+    "Title": "Lesson 1",
+    "ScoreReq": 80,
+    "AllowRedo": false,
+    "NewKeys": [
         "F",
         "J"
     ],
-    "showKeyboard": true,
-    "hasIntroduction": true,
-    "sections": [
+    "ShowKeyboard": true,
+    "FingerGroupsToShow": [
+      "home-key"
+    ],
+    "HasIntroduction": true,
+    "Sections": [
         {
-            "id": "gobbledygookabc",
-            "title": "Section 1",
-            "isTimed": true,
-            "timeLimit": 2,
-            "instructions": "Just type whatever is in this section. There are no special instructions, I just want a paragraph here to see what its appearance is and to style it properly.",
-            "work": "fff jj fj jf jj ff jf jjf jjjf ffj jff jj"
+            "Id": "gobbledygookabc",
+            "Title": "Section 1",
+            "IsTimed": true,
+            "TimeLimit": 2,
+            "Instructions": "Just type whatever is in this section. There are no special instructions, I just want a paragraph here to see what its appearance is and to style it properly.",
+            "Work": "fff jj fj jf jj ff jf jjf jjjf ffj jff jj"
         },
         {
-            "id": "gobbledygookdef",
-            "title": "Section 2",
-            "instructions": "You've done this before.",
-            "work": "jj fff jf fj fj jjf jjf ff jf ffj fj"
+            "Id": "gobbledygookdef",
+            "Title": "Section 2",
+            "Instructions": "You've done this before.",
+            "Work": "jj fff jf fj fj jjf jjf ff jf ffj fj"
         },
         {
-            "id": "gobbledygookghi",
-            "title": "Section 3",
-            "instructions": "Do it once again.",
-            "work": "fj fj jf"
+            "Id": "gobbledygookghi",
+            "Title": "Section 3",
+            "Instructions": "Do it once again.",
+            "Work": "fj fj jf"
         },
         {
-            "id": "gobbledygookjkl",
-            "title": "Section 4",
-            "instructions": "Are you getting tired of this yet? Ha! just wait till you see the next lesson. You'll wish you were still doing this one!",
-            "work": "fj jj jjj ff jjf ffj"
+            "Id": "gobbledygookjkl",
+            "Title": "Section 4",
+            "Instructions": "Are you getting tired of this yet? Ha! just wait till you see the next lesson. You'll wish you were still doing this one!",
+            "Work": "fj jj jjj ff jjf ffj"
         }
     ]
 };
@@ -66,15 +69,15 @@ var LessonStore = assign({}, EventEmitter.prototype, {
 
   setNextSection: function() {
     if (!_activeSection)
-      _activeSection = _lesson.sections[0];
+      _activeSection = _lesson.Sections[0];
     else {
-      var i = _lesson.sections.indexOf(_activeSection) + 1;
-      if (i === _lesson.sections.length) {
+      var i = _lesson.Sections.indexOf(_activeSection) + 1;
+      if (i === _lesson.Sections.length) {
         _lessonComplete = true;
         this.emitLessonCompleteChange();
       }
       else
-        _activeSection = _lesson.sections[i];
+        _activeSection = _lesson.Sections[i];
     }
   },
 
@@ -106,8 +109,8 @@ var LessonStore = assign({}, EventEmitter.prototype, {
   },
 
   getLessonCharCount: function() {
-    var sum = _lesson.sections.reduce(function(total, section) {
-        return total + section.work.length
+    var sum = _lesson.Sections.reduce(function(total, section) {
+        return total + section.Work.length
     }, 0);
     return sum;
   },

@@ -36,9 +36,9 @@ module.exports = React.createClass({
 
         var lesson = Lesson.getLesson();
 
-        if (!lesson.showKeyboard)
+        if (!lesson.ShowKeyboard)
             return;
 
-        return <Keyboard fingerGroupsToShow={lesson.fingerGroupsToShow}/>
+        return <Keyboard fingerGroupsToShow={lesson.FingerGroupsToShow}/>
     }
 });

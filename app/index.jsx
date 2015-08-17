@@ -79,7 +79,7 @@ var Body = React.createClass({
     renderIntro() {
         return;
         var lesson = LessonStore.getLesson();
-        if (this.state.isLoggedIn != true || !lesson || lesson.hasIntroduction != true)
+        if (this.state.isLoggedIn != true || !lesson || lesson.HasIntroduction != true)
             return;
 
         var intro = document.getElementById("intro");
@@ -90,7 +90,7 @@ var Body = React.createClass({
              intro.innerHTML = "<img src='../assets/pic.jpg'/>"
              //intro.innerHTML = xhr.responseText;
         };
-        xhr.open("GET", "../getintro?id=" + lesson.id, true);
+        xhr.open("GET", "../getintro?id=" + lesson.Id, true);
         xhr.send(null);
     },
 
