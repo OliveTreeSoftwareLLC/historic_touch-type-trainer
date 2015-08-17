@@ -1,30 +1,58 @@
 var EventEmitter = require('events').EventEmitter;
 var AppDispatcher = require('../dispatchers/AppDispatcher');
 var assign = require('object-assign');
+var jQuery = require('jquery');
 
 var CHANGE_EVENT = 'change';
-var _user = {
-  id: 'khgglgl',
-  name: 'User'
-};
+var _user = null;
+var _loginError = null;
+var _isWaiting = false;
 
 function logIn(user) {
-  _user.id = user.id;
-  _user.name = user.name;
+  _isWaiting = true;
+  AuthStore.emitChange();
+  jQuery.ajax({
+    type: "POST",
+    url: "http://localhost:8091/logIn?username=" + user.username + "&password=" + user.password,
+    success: handleSubmitSuccess,
+    error: handleSubmitFailure,
+    dataType: 'json'
+  });
+}
+//    data: { username: user.username, password: user.password },
+
+function handleSubmitSuccess() {
+  alert("success");
+  _isWaiting = false;
+  AuthStore.emitChange();
+}
+
+function handleSubmitFailure() {
+  alert("failure");
+  _isWaiting = false;
+  AuthStore.emitChange();
 }
 
 function logOut() {
-  _user.id = '';
-  _user.name = '';
+  _user = null;
+  AuthStore.emitChange();
 }
 
 var AuthStore = assign({}, EventEmitter.prototype, {
 
   isLoggedIn: function() {
-    if (_user.id && _user.name)
+    if (_user && _user.id && _user.name)
       return true;
     else
       return false;
+  },
+
+  isWaitingOnServer: function() {
+    return _isWaiting;
+  },
+
+  getLoginError: function() {
+    return _loginError;
   },
 
   getUser: function() {
@@ -43,16 +71,10 @@ var AuthStore = assign({}, EventEmitter.prototype, {
     this.emit(CHANGE_EVENT);
   },
 
-  /**
-   * @param {function} callback
-   */
   addChangeListener: function(callback) {
     this.on(CHANGE_EVENT, callback);
   },
 
-  /**
-   * @param {function} callback
-   */
   removeChangeListener: function(callback) {
     this.removeListener(CHANGE_EVENT, callback);
   },
@@ -62,15 +84,11 @@ var AuthStore = assign({}, EventEmitter.prototype, {
 
     switch(action.actionType) {
       case 'LOGIN':
-        if (action.id !== '' && action.name !== '') {
-          logIn({ id: action.id, name: action.name })
-          AuthStore.emitChange();
-        }
+        logIn({ username: action.username, password: action.password })
         break;
 
       case 'LOGOUT':
         logOut();
-        AuthStore.emitChange();
         break;
 
       // add more cases for other actionTypes
