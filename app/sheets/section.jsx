@@ -18,7 +18,7 @@ module.exports = React.createClass({
                 {this.renderTimer()}
             </div>
             <p className='section-instructions'>
-                {this.props.section.instructions}
+                {this.props.section.Instructions}
             </p>
             <div id={this.getDivId()}
                 tabIndex='0'
