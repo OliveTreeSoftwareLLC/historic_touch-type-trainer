@@ -169,11 +169,11 @@
 
 	/** @jsx React.DOM */
 	'use strict'
-	__webpack_require__(28)
+	__webpack_require__(29)
 	var React = __webpack_require__(1);
 	var AuthStore = __webpack_require__(11);
 	var Lesson = __webpack_require__(9);
-	var Keyboard = __webpack_require__(30);
+	var Keyboard = __webpack_require__(31);
 
 	module.exports = React.createClass({displayName: "module.exports",
 
@@ -219,7 +219,7 @@
 
 	/** @jsx React.DOM */
 	'use strict'
-	__webpack_require__(23)
+	__webpack_require__(24)
 	var React = __webpack_require__(1);
 	var AuthStore = __webpack_require__(11);
 	var LessonStore = __webpack_require__(9);
@@ -302,10 +302,11 @@
 
 	/** @jsx React.DOM */
 	'use strict'
-	__webpack_require__(33)
+	__webpack_require__(32)
 	var React = __webpack_require__(1);
 	var AuthStore = __webpack_require__(11);
 	var AppDispatcher = __webpack_require__(12);
+	var Spinner = __webpack_require__(34);
 
 	module.exports = React.createClass({displayName: "module.exports",
 
@@ -325,18 +326,19 @@
 	    },
 
 	    handleAuthChange:function() {
+	        var isWaiting = AuthStore.isWaitingOnServer();
 	        this.setState({
-	            isWaiting: AuthStore.isWaitingOnServer(),
+	            isWaiting: isWaiting,
 	            errorData: AuthStore.getLoginError()
 	        });
+	        if (!isWaiting)
+	            document.getElementById("Username").focus();
 	    },
 
 	    render:function() {
 	        if (this.state.isWaiting) {
 	            return React.createElement("form", {className: "login"}, 
-	                React.createElement("div", null, 
-	                    "Please Wait...."
-	                )
+	                React.createElement(Spinner, null)
 	            );
 	        }
 
@@ -383,10 +385,10 @@
 
 	/** @jsx React.DOM */
 	'use strict'
-	__webpack_require__(25)
+	__webpack_require__(26)
 	var React = __webpack_require__(1);
 	var LessonStore = __webpack_require__(9);
-	var Section = __webpack_require__(27);
+	var Section = __webpack_require__(28);
 
 	module.exports = React.createClass({displayName: "module.exports",
 
@@ -442,10 +444,10 @@
 
 	/** @jsx React.DOM */
 	'use strict'
-	__webpack_require__(25)
+	__webpack_require__(26)
 	var React = __webpack_require__(1);
 	var LessonStore = __webpack_require__(9);
-	var Section = __webpack_require__(27);
+	var Section = __webpack_require__(28);
 	var AppDispatcher = __webpack_require__(12);
 
 	module.exports = React.createClass({displayName: "module.exports",
@@ -548,31 +550,49 @@
 	var LessonStore = __webpack_require__(9);
 
 	var _lesson = {
-	    "Id": "aksdkas;ajf",
+	    "Id": "aksdjfas;kjkas;ajf",
 	    "Title": "Lesson 2",
 	    "ScoreReq": 80,
-	    "ShowKeyboard": true,
+	    "AllowRedo": false,
 	    "NewKeys": [
 	        "D",
 	        "K"
 	    ],
+	    "ShowKeyboard": false,
 	    "FingerGroupsToShow": [
-	        "home-key" ],
+	      "home-key"
+	    ],
+	    "HasIntroduction": false,
 	    "Sections": [
 	        {
-	            "Id": "1",
+	            "Id": "gobbledygookabc",
 	            "Title": "Section 1",
-	            "Instructions": "Just type whatever is in this section. There are no special instructions, I just want a paragraph here to see what its appearance is and to style it properly.",
-	            "Work": "dKd"
+	            "IsTimed": false,
+	            "TimeLimit": 2,
+	            "Instructions": "Type each letter slowly and carefully saying the letter in your mind as you type it.",
+	            "Work": "ddd kk dk kd kk dd kd kkd kkkd ddk kdd kk"
 	        },
 	        {
-	            "Id": "2",
+	            "Id": "gobbledygookdef",
 	            "Title": "Section 2",
-	            "Instructions": "Are you getting tired of this yet? Ha! just wait till you see the next lesson. You'll wish you were still doing this one!",
-	            "Work": "dd kk"
+	            "Instructions": "Type slightly faster trying to maintain an even pace. Remember to say each letter to yourself as you type.",
+	            "Work": "kk ddd kd dk dk kkd kkd dd kd ddk dk"
+	        },
+	        {
+	            "Id": "gobbledygookghi",
+	            "Title": "Section 3",
+	            "Instructions": "Do it once again. If you were able to maintain an even pace on the last section, try to do this one a little faster. Otherwise slow down a bit so that you can maintain a consistent, rythmic pace.",
+	            "Work": "dk kd kk dd kdk"
+	        },
+	        {
+	            "Id": "gobbledygookjkl",
+	            "Title": "Section 4",
+	            "Instructions": "Do this section as fast as you can, saying each letter to yourself as you type. Don't worry about an even pace this time. Just type!",
+	            "Work": "kkk ddd kdk dkd kdd kkd kdddk"
 	        }
 	    ]
 	};
+
 	module.exports = React.createClass({displayName: "module.exports",
 
 	    getInitialState:function() {
@@ -749,7 +769,7 @@
 /* 9 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var EventEmitter = __webpack_require__(32).EventEmitter;
+	var EventEmitter = __webpack_require__(35).EventEmitter;
 	var AppDispatcher = __webpack_require__(12);
 	var assign = __webpack_require__(36);
 
@@ -769,36 +789,36 @@
 	        "F",
 	        "J"
 	    ],
-	    "ShowKeyboard": true,
+	    "ShowKeyboard": false,
 	    "FingerGroupsToShow": [
 	      "home-key"
 	    ],
-	    "HasIntroduction": true,
+	    "HasIntroduction": false,
 	    "Sections": [
 	        {
 	            "Id": "gobbledygookabc",
 	            "Title": "Section 1",
-	            "IsTimed": true,
+	            "IsTimed": false,
 	            "TimeLimit": 2,
-	            "Instructions": "Just type whatever is in this section. There are no special instructions, I just want a paragraph here to see what its appearance is and to style it properly.",
+	            "Instructions": "Type each letter slowly and carefully saying the letter in your mind as you type it.",
 	            "Work": "fff jj fj jf jj ff jf jjf jjjf ffj jff jj"
 	        },
 	        {
 	            "Id": "gobbledygookdef",
 	            "Title": "Section 2",
-	            "Instructions": "You've done this before.",
+	            "Instructions": "Type slightly faster trying to maintain an even pace. Remember to say each letter to yourself as you type.",
 	            "Work": "jj fff jf fj fj jjf jjf ff jf ffj fj"
 	        },
 	        {
 	            "Id": "gobbledygookghi",
 	            "Title": "Section 3",
-	            "Instructions": "Do it once again.",
+	            "Instructions": "Do it once again. If you were able to maintain an even pace on the last section, try to do this one a little faster. Otherwise slow down a bit so that you can maintain a consistent, rythmic pace.",
 	            "Work": "fj fj jf"
 	        },
 	        {
 	            "Id": "gobbledygookjkl",
 	            "Title": "Section 4",
-	            "Instructions": "Are you getting tired of this yet? Ha! just wait till you see the next lesson. You'll wish you were still doing this one!",
+	            "Instructions": "Do this section as fast as you can, saying each letter to yourself as you type. Don't worry about an even pace this time. Just type!",
 	            "Work": "fj jj jjj ff jjf ffj"
 	        }
 	    ]
@@ -987,7 +1007,7 @@
 /* 10 */
 /***/ function(module, exports, __webpack_require__) {
 
-	/** @jsx React.DOM */var EventEmitter = __webpack_require__(32).EventEmitter;
+	/** @jsx React.DOM */var EventEmitter = __webpack_require__(35).EventEmitter;
 	var AppDispatcher = __webpack_require__(12);
 	var assign = __webpack_require__(36);
 
@@ -1039,13 +1059,13 @@
 /* 11 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var EventEmitter = __webpack_require__(32).EventEmitter;
+	var EventEmitter = __webpack_require__(35).EventEmitter;
 	var AppDispatcher = __webpack_require__(12);
 	var assign = __webpack_require__(36);
-	var jQuery = __webpack_require__(37);
+	var jQuery = __webpack_require__(38);
 
 	var CHANGE_EVENT = 'change';
-	var _user = null;
+	var _user = { id: "abc-def-ghi", name: "Melvin Ray"};
 	var _loginError = null;
 	var _isWaiting = false;
 
@@ -1146,7 +1166,7 @@
 /* 12 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var Dispatcher = __webpack_require__(31);
+	var Dispatcher = __webpack_require__(23);
 	var assign = __webpack_require__(36);
 
 	var AppDispatcher = assign({}, Dispatcher.prototype, {
@@ -1264,7 +1284,7 @@
 /* 15 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(35)();
+	exports = module.exports = __webpack_require__(37)();
 	// imports
 
 
@@ -1304,7 +1324,7 @@
 /* 17 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(35)();
+	exports = module.exports = __webpack_require__(37)();
 	// imports
 
 
@@ -1569,7 +1589,7 @@
 /* 20 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(35)();
+	exports = module.exports = __webpack_require__(37)();
 	// imports
 
 
@@ -1609,7 +1629,7 @@
 /* 22 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(35)();
+	exports = module.exports = __webpack_require__(37)();
 	// imports
 
 
@@ -1623,10 +1643,63 @@
 /* 23 */
 /***/ function(module, exports, __webpack_require__) {
 
+	var Promise = __webpack_require__(44).Promise;
+	var assign = __webpack_require__(36);
+
+	var _callbacks = [];
+	var _promises = [];
+
+	var Dispatcher = function() {};
+	Dispatcher.prototype = assign({}, Dispatcher.prototype, {
+
+	  /**
+	   * Register a Store's callback so that it may be invoked by an action.
+	   * @param {function} callback The callback to be registered.
+	   * @return {number} The index of the callback within the _callbacks array.
+	   */
+	  register: function(callback) {
+	    _callbacks.push(callback);
+	    return _callbacks.length - 1; // index
+	  },
+
+	  /**
+	   * dispatch
+	   * @param  {object} payload The data from the action.
+	   */
+	  dispatch: function(payload) {
+	    // First create array of promises for callbacks to reference.
+	    var resolves = [];
+	    var rejects = [];
+	    _promises = _callbacks.map(function(_, i) {
+	      return new Promise(function(resolve, reject) {
+	        resolves[i] = resolve;
+	        rejects[i] = reject;
+	      });
+	    });
+	    // Dispatch to callbacks and resolve/reject promises.
+	    _callbacks.forEach(function(callback, i) {
+	      // Callback can return an obj, to resolve, or a promise, to chain.
+	      // See waitFor() for why this might be useful.
+	      Promise.resolve(callback(payload)).then(function() {
+	        resolves[i](payload);
+	      }, function() {
+	        rejects[i](new Error('Dispatcher callback unsuccessful'));
+	      });
+	    });
+	    _promises = [];
+	  }
+	});
+
+	module.exports = Dispatcher;
+
+/***/ },
+/* 24 */
+/***/ function(module, exports, __webpack_require__) {
+
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(24);
+	var content = __webpack_require__(25);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
 	var update = __webpack_require__(18)(content, {});
@@ -1646,10 +1719,10 @@
 	}
 
 /***/ },
-/* 24 */
+/* 25 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(35)();
+	exports = module.exports = __webpack_require__(37)();
 	// imports
 
 
@@ -1660,13 +1733,13 @@
 
 
 /***/ },
-/* 25 */
+/* 26 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(26);
+	var content = __webpack_require__(27);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
 	var update = __webpack_require__(18)(content, {});
@@ -1686,10 +1759,10 @@
 	}
 
 /***/ },
-/* 26 */
+/* 27 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(35)();
+	exports = module.exports = __webpack_require__(37)();
 	// imports
 
 
@@ -1700,7 +1773,7 @@
 
 
 /***/ },
-/* 27 */
+/* 28 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/** @jsx React.DOM */var React = __webpack_require__(1);
@@ -1723,7 +1796,7 @@
 	                this.renderTimer()
 	            ), 
 	            React.createElement("p", {className: "section-instructions"}, 
-	                this.props.section.instructions
+	                this.props.section.Instructions
 	            ), 
 	            React.createElement("div", {id: this.getDivId(), 
 	                tabIndex: "0", 
@@ -1891,13 +1964,13 @@
 
 
 /***/ },
-/* 28 */
+/* 29 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(29);
+	var content = __webpack_require__(30);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
 	var update = __webpack_require__(18)(content, {});
@@ -1917,10 +1990,10 @@
 	}
 
 /***/ },
-/* 29 */
+/* 30 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(35)();
+	exports = module.exports = __webpack_require__(37)();
 	// imports
 
 
@@ -1931,14 +2004,14 @@
 
 
 /***/ },
-/* 30 */
+/* 31 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/** @jsx React.DOM */
 	'use strict'
-	__webpack_require__(38)
+	__webpack_require__(39)
 	var React = __webpack_require__(1);
-	var Key = __webpack_require__(40);
+	var Key = __webpack_require__(41);
 
 	module.exports = React.createClass({displayName: "module.exports",
 	    getInitialState:function() {
@@ -2070,60 +2143,68 @@
 
 
 /***/ },
-/* 31 */
+/* 32 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var Promise = __webpack_require__(41).Promise;
-	var assign = __webpack_require__(36);
+	// style-loader: Adds some css to the DOM by adding a <style> tag
 
-	var _callbacks = [];
-	var _promises = [];
-
-	var Dispatcher = function() {};
-	Dispatcher.prototype = assign({}, Dispatcher.prototype, {
-
-	  /**
-	   * Register a Store's callback so that it may be invoked by an action.
-	   * @param {function} callback The callback to be registered.
-	   * @return {number} The index of the callback within the _callbacks array.
-	   */
-	  register: function(callback) {
-	    _callbacks.push(callback);
-	    return _callbacks.length - 1; // index
-	  },
-
-	  /**
-	   * dispatch
-	   * @param  {object} payload The data from the action.
-	   */
-	  dispatch: function(payload) {
-	    // First create array of promises for callbacks to reference.
-	    var resolves = [];
-	    var rejects = [];
-	    _promises = _callbacks.map(function(_, i) {
-	      return new Promise(function(resolve, reject) {
-	        resolves[i] = resolve;
-	        rejects[i] = reject;
-	      });
-	    });
-	    // Dispatch to callbacks and resolve/reject promises.
-	    _callbacks.forEach(function(callback, i) {
-	      // Callback can return an obj, to resolve, or a promise, to chain.
-	      // See waitFor() for why this might be useful.
-	      Promise.resolve(callback(payload)).then(function() {
-	        resolves[i](payload);
-	      }, function() {
-	        rejects[i](new Error('Dispatcher callback unsuccessful'));
-	      });
-	    });
-	    _promises = [];
-	  }
-	});
-
-	module.exports = Dispatcher;
+	// load the styles
+	var content = __webpack_require__(33);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(18)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../../node_modules/css-loader/index.js!./login.css", function() {
+				var newContent = require("!!./../../node_modules/css-loader/index.js!./login.css");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
 
 /***/ },
-/* 32 */
+/* 33 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(37)();
+	// imports
+
+
+	// module
+	exports.push([module.id, "\r\n.login {\r\n    margin-top: 30px;\r\n    padding: 30px;\r\n    padding-right: 40px;\r\n    border-radius: 10px;\r\n    border-style: solid 3px #949494;\r\n    box-shadow: 10px 10px 15px #323232;\r\n    display: inline-block;\r\n    width: 220px;\r\n    background-color: #FFF;\r\n}\r\n\r\n.login > div {\r\n    margin-top: 10px;\r\n    float: right;\r\n}\r\n\r\n.login-error {\r\n    color: #FF5151;\r\n    margin-bottom: 5px;\r\n}\r\n", ""]);
+
+	// exports
+
+
+/***/ },
+/* 34 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/** @jsx React.DOM */
+	'use strict'
+	__webpack_require__(42)
+	var React = __webpack_require__(1);
+
+	module.exports = React.createClass({displayName: "module.exports",
+	    render:function() {
+	        return React.createElement("div", {className: "spinner"}, 
+	            React.createElement("div", null, "Please Wait...."), 
+	            React.createElement("div", {className: "spinner-loading spinner-outer"}, 
+	                React.createElement("div", {className: "spinner-loading spinner-inner"})
+	            )
+	        );
+	    }
+	});
+
+
+/***/ },
+/* 35 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// Copyright Joyent, Inc. and other Node contributors.
@@ -2430,47 +2511,52 @@
 
 
 /***/ },
-/* 33 */
+/* 36 */
 /***/ function(module, exports, __webpack_require__) {
 
-	// style-loader: Adds some css to the DOM by adding a <style> tag
+	'use strict';
+	var propIsEnumerable = Object.prototype.propertyIsEnumerable;
 
-	// load the styles
-	var content = __webpack_require__(34);
-	if(typeof content === 'string') content = [[module.id, content, '']];
-	// add the styles to the DOM
-	var update = __webpack_require__(18)(content, {});
-	if(content.locals) module.exports = content.locals;
-	// Hot Module Replacement
-	if(false) {
-		// When the styles change, update the <style> tags
-		if(!content.locals) {
-			module.hot.accept("!!./../../node_modules/css-loader/index.js!./login.css", function() {
-				var newContent = require("!!./../../node_modules/css-loader/index.js!./login.css");
-				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-				update(newContent);
-			});
+	function ToObject(val) {
+		if (val == null) {
+			throw new TypeError('Object.assign cannot be called with null or undefined');
 		}
-		// When the module is disposed, remove the <style> tags
-		module.hot.dispose(function() { update(); });
+
+		return Object(val);
 	}
 
+	function ownEnumerableKeys(obj) {
+		var keys = Object.getOwnPropertyNames(obj);
+
+		if (Object.getOwnPropertySymbols) {
+			keys = keys.concat(Object.getOwnPropertySymbols(obj));
+		}
+
+		return keys.filter(function (key) {
+			return propIsEnumerable.call(obj, key);
+		});
+	}
+
+	module.exports = Object.assign || function (target, source) {
+		var from;
+		var keys;
+		var to = ToObject(target);
+
+		for (var s = 1; s < arguments.length; s++) {
+			from = arguments[s];
+			keys = ownEnumerableKeys(Object(from));
+
+			for (var i = 0; i < keys.length; i++) {
+				to[keys[i]] = from[keys[i]];
+			}
+		}
+
+		return to;
+	};
+
+
 /***/ },
-/* 34 */
-/***/ function(module, exports, __webpack_require__) {
-
-	exports = module.exports = __webpack_require__(35)();
-	// imports
-
-
-	// module
-	exports.push([module.id, "\r\n.login {\r\n    margin-top: 30px;\r\n    padding: 30px;\r\n    padding-right: 40px;\r\n    border-radius: 10px;\r\n    border-style: solid 3px #949494;\r\n    box-shadow: 10px 10px 15px #323232;\r\n    display: inline-block;\r\n    width: 220px;\r\n    background-color: #FFF;\r\n}\r\n\r\n.login > div {\r\n    margin-top: 10px;\r\n    float: right;\r\n}\r\n\r\n.login-error {\r\n    color: #FF5151;\r\n    margin-bottom: 5px;\r\n}\r\n", ""]);
-
-	// exports
-
-
-/***/ },
-/* 35 */
+/* 37 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/*
@@ -2526,52 +2612,7 @@
 
 
 /***/ },
-/* 36 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	var propIsEnumerable = Object.prototype.propertyIsEnumerable;
-
-	function ToObject(val) {
-		if (val == null) {
-			throw new TypeError('Object.assign cannot be called with null or undefined');
-		}
-
-		return Object(val);
-	}
-
-	function ownEnumerableKeys(obj) {
-		var keys = Object.getOwnPropertyNames(obj);
-
-		if (Object.getOwnPropertySymbols) {
-			keys = keys.concat(Object.getOwnPropertySymbols(obj));
-		}
-
-		return keys.filter(function (key) {
-			return propIsEnumerable.call(obj, key);
-		});
-	}
-
-	module.exports = Object.assign || function (target, source) {
-		var from;
-		var keys;
-		var to = ToObject(target);
-
-		for (var s = 1; s < arguments.length; s++) {
-			from = arguments[s];
-			keys = ownEnumerableKeys(Object(from));
-
-			for (var i = 0; i < keys.length; i++) {
-				to[keys[i]] = from[keys[i]];
-			}
-		}
-
-		return to;
-	};
-
-
-/***/ },
-/* 37 */
+/* 38 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -11787,13 +11828,13 @@
 
 
 /***/ },
-/* 38 */
+/* 39 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(39);
+	var content = __webpack_require__(40);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
 	var update = __webpack_require__(18)(content, {});
@@ -11813,10 +11854,10 @@
 	}
 
 /***/ },
-/* 39 */
+/* 40 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(35)();
+	exports = module.exports = __webpack_require__(37)();
 	// imports
 
 
@@ -11827,7 +11868,7 @@
 
 
 /***/ },
-/* 40 */
+/* 41 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/** @jsx React.DOM */
@@ -11924,7 +11965,47 @@
 
 
 /***/ },
-/* 41 */
+/* 42 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+
+	// load the styles
+	var content = __webpack_require__(43);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(18)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../../node_modules/css-loader/index.js!./spinner.css", function() {
+				var newContent = require("!!./../../node_modules/css-loader/index.js!./spinner.css");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 43 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(37)();
+	// imports
+
+
+	// module
+	exports.push([module.id, ".spinner > div {\r\n  display: inline-block;\r\n  vertical-align: middle;\r\n  text-align: center;\r\n}\r\n\r\n.spinner-loading{\r\n  box-sizing: border-box;\r\n  position: relative;\r\n  padding: 5px;\r\n  background-color: transparent;\r\n  border: 5px solid transparent;\r\n  border-top-color: #7B7B7B;\r\n  border-bottom-color: #7B7B7B;\r\n  border-radius: 50%;\r\n}\r\n\r\n.spinner-outer{\r\n  animation: spin 1s infinite;\r\n}\r\n\r\n.spinner-inner{\r\n  animation: spin 1s infinite;\r\n}\r\n\r\n@keyframes spin{\r\n  0% {\r\n    transform: rotateZ(0deg);\r\n  }\r\n  100% {\r\n    transform: rotateZ(360deg);\r\n  }\r\n}\r\n\r\n", ""]);
+
+	// exports
+
+
+/***/ },
+/* 44 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var require;var __WEBPACK_AMD_DEFINE_RESULT__;/* WEBPACK VAR INJECTION */(function(process, global, module) {/*!
@@ -12063,7 +12144,7 @@
 	    function lib$es6$promise$asap$$attemptVertex() {
 	      try {
 	        var r = require;
-	        var vertx = __webpack_require__(42);
+	        var vertx = __webpack_require__(45);
 	        lib$es6$promise$asap$$vertxNext = vertx.runOnLoop || vertx.runOnContext;
 	        return lib$es6$promise$asap$$useVertxTimer();
 	      } catch(e) {
@@ -12888,7 +12969,7 @@
 	    };
 
 	    /* global define:true module:true window: true */
-	    if ("function" === 'function' && __webpack_require__(43)['amd']) {
+	    if ("function" === 'function' && __webpack_require__(47)['amd']) {
 	      !(__WEBPACK_AMD_DEFINE_RESULT__ = function() { return lib$es6$promise$umd$$ES6Promise; }.call(exports, __webpack_require__, exports, module), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
 	    } else if (typeof module !== 'undefined' && module['exports']) {
 	      module['exports'] = lib$es6$promise$umd$$ES6Promise;
@@ -12900,39 +12981,16 @@
 	}).call(this);
 
 	
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(45), (function() { return this; }()), __webpack_require__(44)(module)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(46), (function() { return this; }()), __webpack_require__(48)(module)))
 
 /***/ },
-/* 42 */
+/* 45 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* (ignored) */
 
 /***/ },
-/* 43 */
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports = function() { throw new Error("define cannot be used indirect"); };
-
-
-/***/ },
-/* 44 */
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports = function(module) {
-		if(!module.webpackPolyfill) {
-			module.deprecate = function() {};
-			module.paths = [];
-			// module.parent = undefined by default
-			module.children = [];
-			module.webpackPolyfill = 1;
-		}
-		return module;
-	}
-
-
-/***/ },
-/* 45 */
+/* 46 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// shim for using process in browser
@@ -12993,6 +13051,29 @@
 	    throw new Error('process.chdir is not supported');
 	};
 	process.umask = function() { return 0; };
+
+
+/***/ },
+/* 47 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = function() { throw new Error("define cannot be used indirect"); };
+
+
+/***/ },
+/* 48 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = function(module) {
+		if(!module.webpackPolyfill) {
+			module.deprecate = function() {};
+			module.paths = [];
+			// module.parent = undefined by default
+			module.children = [];
+			module.webpackPolyfill = 1;
+		}
+		return module;
+	}
 
 
 /***/ }
