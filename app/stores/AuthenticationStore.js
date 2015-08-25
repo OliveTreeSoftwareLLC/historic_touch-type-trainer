@@ -4,7 +4,7 @@ var assign = require('object-assign');
 var jQuery = require('jquery');
 
 var CHANGE_EVENT = 'change';
-var _user = null;
+var _user = { id: "abc-def-ghi", name: "Melvin Ray"};
 var _loginError = null;
 var _isWaiting = false;
 

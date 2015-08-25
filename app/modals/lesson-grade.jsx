@@ -7,31 +7,49 @@ var AppDispatcher = require('../dispatchers/AppDispatcher');
 var LessonStore = require('../stores/lessonStore');
 
 var _lesson = {
-    "Id": "aksdkas;ajf",
+    "Id": "aksdjfas;kjkas;ajf",
     "Title": "Lesson 2",
     "ScoreReq": 80,
-    "ShowKeyboard": true,
+    "AllowRedo": false,
     "NewKeys": [
         "D",
         "K"
     ],
+    "ShowKeyboard": false,
     "FingerGroupsToShow": [
-        "home-key" ],
+      "home-key"
+    ],
+    "HasIntroduction": false,
     "Sections": [
         {
-            "Id": "1",
+            "Id": "gobbledygookabc",
             "Title": "Section 1",
-            "Instructions": "Just type whatever is in this section. There are no special instructions, I just want a paragraph here to see what its appearance is and to style it properly.",
-            "Work": "dKd"
+            "IsTimed": false,
+            "TimeLimit": 2,
+            "Instructions": "Type each letter slowly and carefully saying the letter in your mind as you type it.",
+            "Work": "ddd kk dk kd kk dd kd kkd kkkd ddk kdd kk"
         },
         {
-            "Id": "2",
+            "Id": "gobbledygookdef",
             "Title": "Section 2",
-            "Instructions": "Are you getting tired of this yet? Ha! just wait till you see the next lesson. You'll wish you were still doing this one!",
-            "Work": "dd kk"
+            "Instructions": "Type slightly faster trying to maintain an even pace. Remember to say each letter to yourself as you type.",
+            "Work": "kk ddd kd dk dk kkd kkd dd kd ddk dk"
+        },
+        {
+            "Id": "gobbledygookghi",
+            "Title": "Section 3",
+            "Instructions": "Do it once again. If you were able to maintain an even pace on the last section, try to do this one a little faster. Otherwise slow down a bit so that you can maintain a consistent, rythmic pace.",
+            "Work": "dk kd kk dd kdk"
+        },
+        {
+            "Id": "gobbledygookjkl",
+            "Title": "Section 4",
+            "Instructions": "Do this section as fast as you can, saying each letter to yourself as you type. Don't worry about an even pace this time. Just type!",
+            "Work": "kkk ddd kdk dkd kdd kkd kdddk"
         }
     ]
 };
+
 module.exports = React.createClass({
 
     getInitialState() {
