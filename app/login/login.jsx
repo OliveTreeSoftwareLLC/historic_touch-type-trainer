@@ -4,6 +4,7 @@ require("./login.css")
 var React = require('react');
 var AuthStore = require('../stores/AuthenticationStore');
 var AppDispatcher = require('../dispatchers/AppDispatcher');
+var Spinner = require('../spinner/spinner');
 
 module.exports = React.createClass({
 
@@ -23,18 +24,19 @@ module.exports = React.createClass({
     },
 
     handleAuthChange() {
+        var isWaiting = AuthStore.isWaitingOnServer();
         this.setState({
-            isWaiting: AuthStore.isWaitingOnServer(),
+            isWaiting: isWaiting,
             errorData: AuthStore.getLoginError()
         });
+        if (!isWaiting)
+            document.getElementById("Username").focus();
     },
 
     render() {
         if (this.state.isWaiting) {
             return <form className='login'>
-                <div>
-                    Please Wait....
-                </div>
+                <Spinner/>
             </form>;
         }
 
