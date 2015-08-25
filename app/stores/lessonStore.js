@@ -18,36 +18,36 @@ var _lesson = {
         "F",
         "J"
     ],
-    "ShowKeyboard": true,
+    "ShowKeyboard": false,
     "FingerGroupsToShow": [
       "home-key"
     ],
-    "HasIntroduction": true,
+    "HasIntroduction": false,
     "Sections": [
         {
             "Id": "gobbledygookabc",
             "Title": "Section 1",
-            "IsTimed": true,
+            "IsTimed": false,
             "TimeLimit": 2,
-            "Instructions": "Just type whatever is in this section. There are no special instructions, I just want a paragraph here to see what its appearance is and to style it properly.",
+            "Instructions": "Type each letter slowly and carefully saying the letter in your mind as you type it.",
             "Work": "fff jj fj jf jj ff jf jjf jjjf ffj jff jj"
         },
         {
             "Id": "gobbledygookdef",
             "Title": "Section 2",
-            "Instructions": "You've done this before.",
+            "Instructions": "Type slightly faster trying to maintain an even pace. Remember to say each letter to yourself as you type.",
             "Work": "jj fff jf fj fj jjf jjf ff jf ffj fj"
         },
         {
             "Id": "gobbledygookghi",
             "Title": "Section 3",
-            "Instructions": "Do it once again.",
+            "Instructions": "Do it once again. If you were able to maintain an even pace on the last section, try to do this one a little faster. Otherwise slow down a bit so that you can maintain a consistent, rythmic pace.",
             "Work": "fj fj jf"
         },
         {
             "Id": "gobbledygookjkl",
             "Title": "Section 4",
-            "Instructions": "Are you getting tired of this yet? Ha! just wait till you see the next lesson. You'll wish you were still doing this one!",
+            "Instructions": "Do this section as fast as you can, saying each letter to yourself as you type. Don't worry about an even pace this time. Just type!",
             "Work": "fj jj jjj ff jjf ffj"
         }
     ]
